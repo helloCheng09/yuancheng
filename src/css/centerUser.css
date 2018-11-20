@@ -1,0 +1,100 @@
+@import "depend/mReset.css";
+#centerUser {
+  min-height: 100vh;
+  padding-bottom: 59px;
+  background-color: #f5f5f5;
+}
+#centerUser header {
+  height: 50px;
+  color: #333;
+  background-color: #fff;
+}
+#centerUser .mian-show {
+  margin-bottom: 10px;
+}
+#centerUser .mian-show .user-info-b {
+  padding: 0 15px 15px;
+  background-color: #fff;
+}
+#centerUser .mian-show .user-info-b .user-info {
+  display: flex;
+  align-items: center;
+}
+#centerUser .mian-show .user-info-b .info-l {
+  width: 75px;
+  height: 75px;
+  margin-right: 10px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+#centerUser .mian-show .user-info-b .info-l img {
+  display: block;
+  width: 100%;
+}
+#centerUser .mian-show .user-info-b .info-r {
+  flex: 1;
+  width: 50%;
+}
+#centerUser .mian-show .user-info-b .info-r .name-user {
+  margin-bottom: 4px;
+}
+#centerUser .mian-show .user-info-b .info-r .name-user .name-text {
+  font-family: "PingFang-SC-Bold";
+  font-weight: bolder;
+}
+#centerUser .mian-show .user-info-b .info-r .other-text span {
+  font-size: 14px;
+  line-height: 1.2;
+  color: #999;
+}
+#centerUser .mian-show .setting-list {
+  padding-bottom: 10px;
+  background-color: #fff;
+}
+#centerUser .mian-show .setting-list .setting-item {
+  position: relative;
+  padding: 0 10px;
+  line-height: 3;
+}
+#centerUser .mian-show .setting-list .item-link {
+  display: flex;
+  justify-content: space-between;
+}
+#centerUser .mian-show .setting-list .item-link .s-item-l .icon-b {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 3px;
+}
+#centerUser .mian-show .setting-list .item-link .s-item-l img {
+  display: block;
+  width: 100%;
+}
+#centerUser .mian-show .setting-list .item-link .s-item-l span {
+  vertical-align: middle;
+}
+#centerUser .mian-show .setting-list .item-link .s-item-l em {
+  font-weight: bold;
+  font-style: normal;
+  color: #feca52;
+}
+#centerUser .mian-show .setting-list .item-link .s-item-r span {
+  vertical-align: middle;
+}
+#centerUser .mian-show .setting-list .item-link .msg-text {
+  padding: 0 4px;
+  color: #999;
+}
+#centerUser .mian-show .setting-list .item-link .msg-important {
+  font-size: 16px;
+  color: #feca52;
+}
+#centerUser .mian-show .setting-list .item-link .link-icon {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+}
+#centerUser .mian-show .setting-list .item-link .link-icon img {
+  display: block;
+  width: 100%;
+}

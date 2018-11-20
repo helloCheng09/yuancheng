@@ -1,0 +1,165 @@
+@import "./depend/mReset.css";
+#videoDet {
+    position: relative;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    header {
+        position: absolute;
+        z-index: 999;
+        left: 0;
+        right: 0;
+        background-color: transparent;
+        .header-title {
+            width: 40%;
+        }
+    }
+    .det-p {
+        background-color: #fff;
+        .det-b {
+            padding: 20px 0 10px;
+            margin: 0 10px;
+            .title-b {
+                overflow: hidden;
+                margin-bottom: 4px;
+                h3 {
+                    font-size: 18px;
+                    font-weight: normal;
+                    line-height: 1.2;
+                }
+            }
+            .det-item {
+                .price-b {
+                    float: right; // width: 120px;
+                    text-align: center;
+                    span {}
+                    .pre-price {
+                        font-size: 16px;
+                        font-weight: bold;
+                        text-decoration: line-through;
+                        color: #b9b9b9;
+                    }
+                    .off-price {
+                        font-size: 20px;
+                        font-weight: bold;
+                        color: #d93841;
+                    }
+                }
+            }
+            .video-school {
+                color: #b9b9b9;
+            }
+            .video-author {
+                line-height: 1.4;
+                span:nth-of-type(1) {
+                    display: inline-block;
+                    width: 18px;
+                    height: 18px;
+                    vertical-align: sub;
+                    img {
+                        display: block;
+                        width: 100%;
+                    }
+                }
+                span:nth-of-type(2) {
+                    color: #999;
+                }
+            }
+            .video-school {}
+            .video-author {
+                .learn-num {
+                    display: flex;
+                    margin-top: 5px;
+                    em {
+                        padding: 0 4px;
+                        font-size: 18px;
+                        font-weight: bold;
+                        font-style: normal;
+                    }
+                }
+            }
+            .join-btn {
+                margin: 5px 10px 0;
+                text-align: right;
+                div {
+                    display: inline-block;
+                    padding: 0 10px;
+                    border-radius: 5px;
+                    line-height: 2;
+                    color: #fff;
+                    background-color: #feca52;
+                }
+            }
+        }
+        .det-b::after {
+            border-color: #ddd;
+        }
+        .det-nav {
+            margin-bottom: 10px;
+            .nav-list {}
+            .list-b {
+                display: flex;
+                justify-content: space-around;
+                .nav-item {
+                    line-height: 3;
+                }
+                .nav-text {}
+                .select {
+                    position: relative;
+                        color: #3784fa;
+                }
+                .select::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: 20px;
+                    height: 3px;
+                    background-color: #3784fa;
+                }
+            }
+        }
+    }
+    
+    .det-panel{
+        padding: 15px 0 10px;
+        background-color: #fff;
+        .det-p-det{
+        }
+        .menu-b {
+            padding: 0!important;
+        }
+        .det-box{
+            padding: 0 8px;
+            .menu-list{
+                .fst-list-b{
+                    .fst-menu{
+                        padding: 0 20px;
+
+                    }
+                    .fst-text{
+                        line-height: 2;
+                    }
+                }
+                .list-b{
+                    line-height: 2;
+                    .sec-list-b{
+
+                    }
+                    .sec-menu{
+                        padding: 0 30px;
+                    }
+                    .sec-text{
+
+                    }
+                }
+            }
+        }
+        .det-text{
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        
+    }
+}

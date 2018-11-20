@@ -1,20 +1,24 @@
 //  头部返回导航
-header{
+header {
     position: relative;
     line-height: 50px;
     color: #fff;
     background: #3784fa;
-    .back-icon{ 
+    .back-icon {
         line-height: 50px;
         width: 40px;
         text-align: center;
-        img{
-            display: iline-block;
+        .link-back {
+            display: block;
+        }
+        img {
+            display: inline-block;
             width: 18px;
             height: 18px;
+            vertical-align: middle;
         }
     }
-    .header-title{
+    .header-title {
         position: absolute;
         line-height: 50px;
         left: 50%;
@@ -24,34 +28,308 @@ header{
 }
 
 // 搜索栏
-.search-p{
-   
+.search-p {
+    padding: 0 15px 8px;
     background: #3784fa;
-    .search-btn{
-        padding:0 10px 10xp;
-        .search-link{
-            display: block;
+    .search-btn {
+        padding: 0 10px 10xp;
+        .search-link {
+            display: flex;
+            align-items: center;
             line-height: 32px;
             border-radius: 5px;
             background-color: #2869db;
-
-            .search-max{
-                display: inline-block;
-                // padding: 10px;
+            .search-max {
+                margin: 0 10px 3px;
+                vertical-align: middle;
             }
-            img{
+            img {
                 display: block;
                 width: 15px;
                 height: 15px;
             }
-            .input-b{
-                input{
-
+            .input-b {
+                display: inline-block;
+                padding-right: 10px;
+                flex: 1;
+                input {
+                    width: 100%;
+                    outline: none;
+                    color: rgb(238, 238, 238);
+                    border: none;
+                    background-color: transparent;
+                }
+                input::placeholder {
+                    color: rgb(238, 238, 238);
                 }
             }
         }
     }
 }
 
-// 
+// 分类图标列表
+.class-p {
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    .class-b {
+        ul {
+            font-size: 0;
+            display: flex;
+            justify-content: center;
+        }
+        .class-item {
+            width: 25%;
+            .class-link {}
+            .img-b {
+                width: 80%;
+                margin: 0 auto;
+                img {
+                    display: block;
+                    width: 100%;
+                }
+            }
+            .item-text {
+                text-align: center;
+                font-size: 16px;
+            }
+        }
+    }
+}
 
+// 推荐模块
+.common-t-one {
+    padding-left: 10px;
+    margin-bottom: 15px;
+    .title-text {
+        position: relative;
+        font-weight: bold;
+        font-family: "PingFang-SC-Bold";
+    }
+    .title-text:before {
+        content: '';
+        position: absolute;
+        top: 0px;
+        left: -10px;
+        width: 4px;
+        height: 22px;
+        background-color: #feca52;
+    }
+}
+
+.tujian-class {
+    padding-top: 10px;
+    background-color: #fff;
+    .video-box {
+        .box-list {
+            >ul {
+                display: flex;
+                flex-wrap: wrap;
+                padding: 0 5px;
+            }
+        }
+        ul {
+            .video-item {
+                width: 50%;
+                margin-top: 5px;
+                padding: 0 5px;
+                .video-link {
+                    position: relative;
+                    display: block;
+                }
+                .video-tag {
+                    position: absolute;
+                    top: 5px;
+                    right: 5px;
+                    z-index: 999;
+                    .tag-text {
+                        height: 18px;
+                        line-height: 18px;
+                        border-radius: 9px;
+                        padding: 0 5px;
+                        font-size: 14px;
+                        color: #f7f7f7;
+                        background-color: #feca52;
+                    }
+                    .gy-text {
+                        background-color: #52a2fe;
+                    }
+                }
+                .video-poster {
+                    position: relative;
+                    width: 100%;
+                    padding-bottom: 60%;
+                    .video-poster-img {
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 10px;
+                        overflow: hidden;
+                        background-size: cover;
+                        background-position: 50%;
+                        background-repeat: no-repeat;
+                        background-color: rgb(240, 240, 240);
+                    }
+                }
+                .video-des {
+                    line-height: 2;
+                }
+            }
+        }
+    }
+}
+
+// 我的课程列表
+.my-les {
+    ul {
+        font-size: 0;
+    }
+    .item-m::after {
+        border-color: #ddd;
+    }
+    .item-m:last-of-type::after {
+        border: none;
+    }
+    .item-m {
+        padding: 10px 0;
+        .item-b {
+            display: flex;
+            align-items: center;
+        }
+        .les-item-l {
+            width: 30%;
+            margin-right: 10px;
+        }
+        .img-b {
+            position: relative;
+            width: 100%;
+            padding-bottom: 60%;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .img-show {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: 50%;
+            background-repeat: no-repeat;
+            background-color: #f5f5f5;
+        }
+        .les-item-r {
+            max-width: 64%;
+            flex: 1;
+        }
+        .les-item {
+            display: flex;
+            .les-text {
+                width: 80%;
+                margin-bottom: 4px;
+                font-size: 16px;
+                line-height: 1.2;
+                font-weight: normal;
+            }
+            .tag {
+                height: 18px;
+                line-height: 18px;
+                border-radius: 9px;
+                padding: 0 5px;
+                font-size: 14px;
+                text-align: center;
+                color: #fff;
+                background-color: #feca52;
+            }
+            .tag-free {
+                background-color: #52a2fe;
+            }
+            .three-ellipsis {
+                width: auto;
+                font-size: 14px;
+                line-height: 1.2;
+                color: #999;
+                -webkit-line-clamp: 2;
+            }
+            .les-author {
+                font-size: 14px;
+                line-height: 1.2;
+                color: #999;
+            }
+        }
+        .les-title {}
+    }
+}
+
+// 表单项
+.form-item {
+    padding: 0 30px;
+    line-height: 50px;
+    .input-b{
+        display: inline-block;
+    }
+    .input-item {}
+    .input-item::after {
+        border-color: #ddd;
+    }
+    .input-text {
+        width: 100%;
+        outline: none;
+        border: none;
+        padding: 0 10px;
+    }
+    .input-text::placeholder {
+        color: #999999;
+    }
+}
+
+// 提交按钮
+.submit-btn {
+    text-align: center;
+    input {
+        display: inline-block;
+        width: 300px;
+        height: 40px;
+        outline: none;
+        border: none;
+        background-color: #3784fa;
+        border-radius: 20px;
+        color: #fff;
+    }
+}
+
+// footer nav 
+.nav-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    .nav-footer-b {}
+    ul {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+    .nav-btn {
+        width: 33.33%;
+        .nav-link {
+            display: block;
+            padding: 10px 0 4px;
+        }
+        .nav-img {
+            width: 20px;
+            margin: 0 auto;
+            img {
+                display: block;
+                width: 100%;
+            }
+        }
+        .nav-text {
+            line-height: 1.6;
+            text-align: center;
+        }
+    }
+}
+
+.nav-footer::before {
+    border-color: #ddd;
+}

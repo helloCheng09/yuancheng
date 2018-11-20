@@ -1,0 +1,142 @@
+@import "depend/mReset.css";
+#lessonSearch {
+  min-height: 100vh;
+  background-color: #ffff;
+}
+#lessonSearch .main-show .search-menu {
+  padding-top: 15px;
+  box-shadow: 0px 3px 7px 0px rgba(55, 132, 250, 0.1);
+}
+#lessonSearch .main-show .search-menu .menu-btn {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  margin-bottom: 10px;
+}
+#lessonSearch .main-show .search-menu .menu-btn .img-b {
+  position: relative;
+  width: 26px;
+  height: 26px;
+  margin-top: 2px;
+  margin-right: 6px;
+}
+#lessonSearch .main-show .search-menu .menu-btn .img-b img {
+  display: block;
+  width: 100%;
+}
+#lessonSearch .main-show .search-menu .menu-btn .menu-text {
+  font-size: 18px;
+  vertical-align: middle;
+  font-weight: bold;
+}
+#lessonSearch .main-show .search-menu .hid-menu {
+  position: fixed;
+  left: -100vw;
+  bottom: 0;
+  top: 0;
+  z-index: 9999;
+  width: 100%;
+  display: flex;
+}
+#lessonSearch .main-show .search-menu .hid-menu .left-list {
+  position: absolute;
+  left: -64px;
+  bottom: 0;
+  top: 0;
+  z-index: 9999;
+  background-color: #fff;
+}
+#lessonSearch .main-show .search-menu .hid-menu .close-p {
+  flex: 1;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+#lessonSearch .main-show .search-menu h3 {
+  margin-top: 40px;
+  padding: 0 10px;
+  font-size: 18px;
+}
+#lessonSearch .main-show .search-menu .hid-list {
+  margin-top: 40px;
+}
+#lessonSearch .main-show .search-menu .hid-list .hid-item-b {
+  padding: 5px 30px;
+  margin-bottom: 10px;
+  display: flex;
+}
+#lessonSearch .main-show .search-menu .hid-list .select {
+  background-color: #e6e6e6;
+}
+#lessonSearch .main-show .search-menu .hid-list .img-icon div {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+#lessonSearch .main-show .search-menu .hid-list .img-icon div img {
+  display: block;
+  width: 100%;
+}
+#lessonSearch .main-show .search-menu .hid-list .item-text {
+  line-height: 30px;
+}
+#lessonSearch .main-show .search-menu .menu-bar::after {
+  content: '';
+  position: absolute;
+  width: 40px;
+  right: 0px;
+  top: 0;
+  height: 32px;
+  background: linear-gradient(270deg, #fff, #fff 20%, rgba(250, 250, 250, 0));
+}
+#lessonSearch .main-show .search-menu .menu-bar::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  left: 0px;
+  top: 0;
+  height: 32px;
+  z-index: 888;
+  background: linear-gradient(-270deg, #fff, #fff 20%, rgba(250, 250, 250, 0));
+}
+#lessonSearch .main-show .search-menu .menu-bar {
+  position: relative;
+  height: 32px;
+  padding-right: 20px;
+  overflow: hidden;
+}
+#lessonSearch .main-show .search-menu .menu-bar .bar-list {
+  position: relative;
+  padding-bottom: 20px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+#lessonSearch .main-show .search-menu .menu-bar ul {
+  width: 100%;
+  white-space: nowrap;
+}
+#lessonSearch .main-show .search-menu .menu-bar ul .bar-item {
+  display: inline-block;
+  margin: 0 20px;
+}
+#lessonSearch .main-show .search-menu .menu-bar ul .bar-item .item-text {
+  line-height: 2;
+}
+#lessonSearch .main-show .search-menu .menu-bar ul .bar-item .select {
+  position: relative;
+  color: #3784fa;
+}
+#lessonSearch .main-show .search-menu .menu-bar ul .bar-item .select::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 3px;
+  background-color: #3784fa;
+}
+#lessonSearch .main-show .my-les {
+  padding-left: 10px;
+}

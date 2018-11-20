@@ -1,0 +1,109 @@
+@import "./depend/mReset.css";
+#centerUser {
+    min-height: 100vh;
+    padding-bottom: 59px;
+    background-color: #f5f5f5;
+    header {
+        height: 50px;
+        color: #333;
+        background-color: #fff;
+    }
+    .mian-show {
+        margin-bottom: 10px;
+        .user-info-b {
+            padding: 0 15px 15px;
+            background-color: #fff;
+            .user-info {
+                display: flex;
+                align-items: center;
+            }
+            .info-l {
+                width: 75px;
+                height: 75px;
+                margin-right: 10px;
+                overflow: hidden;
+                border-radius: 50%;
+                img {
+                    display: block;
+                    width: 100%;
+                }
+            }
+            .info-r {
+                flex: 1;
+                width: 50%;
+                .name-user {
+                    margin-bottom: 4px;
+                    .name-text {
+                        font-family: "PingFang-SC-Bold";
+                        font-weight: bolder;
+                    }
+                }
+                .other-detail {}
+                .other-text {
+                    span {
+                        font-size: 14px;
+                        line-height: 1.2;
+                        color: #999;
+                    }
+                }
+            }
+        }
+        .setting-list {
+            padding-bottom: 10px;
+            background-color: #fff;
+            .setting-b {}
+            ul {}
+            .setting-item {
+                position: relative;
+                padding: 0 10px;
+                line-height: 3;
+            }
+            .item-link {
+                display: flex;
+                justify-content: space-between;
+                .s-item-l {
+                    .icon-b {
+                        display: inline-block;
+                        width: 18px;
+                        height: 18px;
+                        margin-right: 3px;
+                    }
+                    img {
+                        display: block;
+                        width: 100%;
+                    }
+                    span {
+                        vertical-align: middle;
+                    }
+                    em {
+                        font-weight: bold;
+                        font-style: normal;
+                        color: #feca52;
+                    }
+                }
+                .s-item-r {
+                    span {
+                        vertical-align: middle;
+                    }
+                }
+                .msg-text {
+                    padding: 0 4px;
+                    color: #999;
+                }
+                .msg-important {
+                    font-size: 16px;
+                    color: #feca52;
+                }
+                .link-icon {
+                    display: inline-block;
+                    width: 18px;
+                    height: 18px;
+                    img {
+                        display: block;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
