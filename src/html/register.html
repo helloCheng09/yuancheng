@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui:ios">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>注册</title>
     <!-- css -->
@@ -35,12 +35,12 @@
                 <form action="" method="" class="form-item">
                     <div class="input-item mob_1px_b">
                         <div class="input-b">
-                            <input type="text" placeholder="请输入账号/手机号" class="input-text">
+                            <input name="tel" type="text" placeholder="请输入账号/手机号" class="input-text">
                         </div>
                     </div>
                     <div class="input-item mob_1px_b">
                         <span class="input-b">
-                            <input type="text" placeholder="请输入验证码" class="input-text">
+                            <input name="code" type="text" placeholder="请输入验证码" class="input-text">
                         </span>
                         <span class="sent-btn mob_1px" id="sendCode">
                             <span class="get-code-text">
@@ -50,17 +50,16 @@
                     </div>
                     <div class="input-item mob_1px_b">
                         <div class="input-b">
-                            <input type="text" placeholder="设置密码" class="input-text">
+                            <input name="psw" type="text" placeholder="设置密码" class="input-text">
                         </div>
                     </div>
                     <div class="input-item mob_1px_b">
                         <div class="input-b">
-                            <input type="text" placeholder="设置密码" class="input-text">
+                            <input name="rePsw" type="text" placeholder="设置密码" class="input-text">
                         </div>
                     </div>
                 </form>
             </div>
-
             <div class="btn-b">
                 <div class="submit-btn">
                     <input type="button" value="注  册">

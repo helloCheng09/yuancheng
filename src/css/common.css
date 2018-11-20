@@ -240,7 +240,7 @@ header .header-title {
   padding: 0 30px;
   line-height: 50px;
 }
-.form-item .input-b {
+.form-item .input-item:nth-of-type(2) .input-b {
   display: inline-block;
 }
 .form-item .input-item::after {
@@ -254,6 +254,38 @@ header .header-title {
 }
 .form-item .input-text::placeholder {
   color: #999999;
+}
+input:focus {
+  color: #52a2fe;
+}
+.main-show {
+  margin-top: 40px;
+}
+.main-show .register-title {
+  padding: 0 35px;
+  margin-bottom: 20px;
+}
+.main-show .register-title h3 {
+  font-size: 18px;
+  font-family: "黑体";
+  color: #3784fa;
+}
+.main-show .form-item .sent-btn {
+  float: right;
+  min-width: 98px;
+  text-align: center;
+  margin-top: 10px;
+  line-height: 2;
+  display: inline-block;
+  padding: 0px 9px;
+  color: #999999;
+}
+.main-show .form-item .sent-btn::before {
+  border-radius: 10px;
+  border-color: #999999;
+}
+.main-show .btn-b {
+  margin-top: 80px;
 }
 .submit-btn {
   text-align: center;

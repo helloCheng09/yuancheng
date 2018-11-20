@@ -92,11 +92,15 @@
         }
 
         // 注册发送表单
-        let sendRegister = () => {
-
+        let sendForm = (btnClass, formClass) => {
+            $(btnClass).on("click", function () {
+                let formData = $(formClass).serializeArray()
+                console.log(formData)
+                root.dealFormData(formData)
+            })
         }
 
-        root.sendRegister = sendRegister
+        root.sendForm = sendForm
         root.sendCode = sendCode
         root.showMn = showMn
         root.newTagToggle = newTagToggle
@@ -131,8 +135,37 @@
      * 初始化
      * init.js
      */
-    (function ($, root) {}(window.$, window.wangjiao || (window.wangjiao = {})));
+    (function ($, root) {
+        // 处理表单数据
+        let dealFormData = (formData) => {
+            // console.log(444)
+            let value
+            let name
+            for (var i = 0; i < formData.length; i++) {
+                name = formData[i].name
+                value = formData[i].value
+                console.log(name)
+                if (value == "") {
+                    layer.confirm('请完善信息~', {
+                        btn: ['好的'],
+                        yes: function (index) {
+                            layer.close(index)
+                            // 聚焦空值
+                            let eleClass = "input[name= " + "'" + name + "'" + "]"
+                            $(eleClass).focus()
+                        }
+                    })
+                    break
+                }
+            }
+            if (i >= formData.length) {
+                // 非空发送后台ajax
+                root.sendDataRegister(formData)
+            }
+        }
 
+        root.dealFormData = dealFormData
+    }(window.$, window.wangjiao || (window.wangjiao = {})));
 
     /****************************************************************************** */
     /**
@@ -145,7 +178,7 @@
                 type: "POST",
                 url: "some.php",
                 data: data,
-                dataType:"JSON",
+                dataType: "JSON",
                 // beforeSend :,
                 success: function (msg) {
                     console.log("Data Saved: " + msg);
@@ -157,8 +190,9 @@
             })
         }
         // error
-        let error = ()=>{
+        let error = () => {
             layer.msg("网络错误~~")
+
         }
 
         // console.log($.param([{"value":"23", "name":"1"}]))
@@ -175,6 +209,13 @@
             modeAjaxPost(url)
         }
 
+        // 提交注册表单
+        let sendDataRegister = (formData) => {
+            let url = "hhh"
+            modeAjaxPost(url, formData)
+        }
+
+        root.sendDataRegister = sendDataRegister
         root.getCode = getCode
         root.getMenuData = getMenuData
     }(window.$, window.wangjiao || (window.wangjiao = {})));
@@ -254,11 +295,40 @@
             // 发送验证码
             root.sendCode()
             // 发送表单
-            root.sendRegister()
-
-        } else if (document.getElementById('videoDet')) {
-
+            root.sendForm(".submit-btn input", ".form-item")
+        } else if (document.getElementById('forget')) {
+            // 忘记密码
+            console.log("忘记密码")
+            // 发送验证码
+            root.sendCode()
+            // 发送表单
+            root.sendForm(".submit-btn input", ".form-item")
         }
     }(window.$, window.wangjiao || (window.wangjiao = {})));
 
-}())
+}());
+
+// (function foo (x){
+//     console.log(arguments)
+//     return x
+// }(1,2,3,4,5))
+// // foo(1,2,3,4,5)
+
+// charCodeAt()
+
+// let stringBitLength = (str) => {
+//     var bitLen = 0
+//     for (var i = 0; i < str.length; i++) {
+//         // bitLen +=  str.charCodeAt(i)
+//         if (str.charCodeAt(i) > 255) {
+//             bitLen += 2
+//         } else {
+//             bitLen++
+//         }
+//     }
+//     console.log(bitLen)
+//     return bitLen
+// }
+
+// var str = "我爱北京天安门abcde"
+// stringBitLength(str)
