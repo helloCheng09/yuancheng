@@ -307,28 +307,3 @@
     }(window.$, window.wangjiao || (window.wangjiao = {})));
 
 }());
-
-// (function foo (x){
-//     console.log(arguments)
-//     return x
-// }(1,2,3,4,5))
-// // foo(1,2,3,4,5)
-
-// charCodeAt()
-
-// let stringBitLength = (str) => {
-//     var bitLen = 0
-//     for (var i = 0; i < str.length; i++) {
-//         // bitLen +=  str.charCodeAt(i)
-//         if (str.charCodeAt(i) > 255) {
-//             bitLen += 2
-//         } else {
-//             bitLen++
-//         }
-//     }
-//     console.log(bitLen)
-//     return bitLen
-// }
-
-// var str = "我爱北京天安门abcde"
-// stringBitLength(str)

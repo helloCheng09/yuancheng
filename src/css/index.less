@@ -30,8 +30,55 @@
             }
         }
     }
-
-    .mian-show{
+    .mian-show {
         margin-bottom: 10px;
+    }
+}
+
+#msg {
+    min-height: 100vh;
+    padding-bottom: 59px;
+    background-color: #f5f5f5;
+    .main-show {
+        margin-top: 0;
+        background-color: #fff;
+        .msg-list-b {
+            .msg-list {
+                .msg-item {
+                    padding: 18px 10px;
+                }
+                .msg-item::after {
+                    border-color: #ddd;
+                }
+                .msg-item:last-of-type::after {
+                    border:none;
+                }
+                .msg-link {
+                    display: flex;
+                    align-items: center;
+                   
+                    .img-b {
+                        display: inline-block;
+                        width: 55px;
+                        height: 55px;
+                        margin-right: 10px;  
+                    }
+                    img {
+                        display: block;
+                        width: 100%;
+                    }
+                    .msg-right {
+                        flex: 1;
+                        .msg-top {
+                            line-height: 2;
+                        }
+                        .msg-det {
+                            line-height: 1.4;
+                            color: #999;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -31,3 +31,45 @@
 #indexWrap .mian-show {
   margin-bottom: 10px;
 }
+#msg {
+  min-height: 100vh;
+  padding-bottom: 59px;
+  background-color: #f5f5f5;
+}
+#msg .main-show {
+  margin-top: 0;
+  background-color: #fff;
+}
+#msg .main-show .msg-list-b .msg-list .msg-item {
+  padding: 18px 10px;
+}
+#msg .main-show .msg-list-b .msg-list .msg-item::after {
+  border-color: #ddd;
+}
+#msg .main-show .msg-list-b .msg-list .msg-item:last-of-type::after {
+  border: none;
+}
+#msg .main-show .msg-list-b .msg-list .msg-link {
+  display: flex;
+  align-items: center;
+}
+#msg .main-show .msg-list-b .msg-list .msg-link .img-b {
+  display: inline-block;
+  width: 55px;
+  height: 55px;
+  margin-right: 10px;
+}
+#msg .main-show .msg-list-b .msg-list .msg-link img {
+  display: block;
+  width: 100%;
+}
+#msg .main-show .msg-list-b .msg-list .msg-link .msg-right {
+  flex: 1;
+}
+#msg .main-show .msg-list-b .msg-list .msg-link .msg-right .msg-top {
+  line-height: 2;
+}
+#msg .main-show .msg-list-b .msg-list .msg-link .msg-right .msg-det {
+  line-height: 1.4;
+  color: #999;
+}
