@@ -12,7 +12,11 @@
   background-color: transparent;
 }
 #videoDet header .header-title {
-  width: 40%;
+  width: 100%;
+  padding-left: 50px;
+}
+#videoDet header .v_detail {
+  text-align: left;
 }
 #videoDet .det-p {
   background-color: #fff;
