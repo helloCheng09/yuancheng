@@ -272,20 +272,90 @@
 
         } else if (document.getElementById('videoDet')) {
             // 观看课程
-            // 实例化播放器
-            var videoObject = {
-                autoplay: false, //是否自动播放，默认true=自动播放，false=默认暂停状态
-                poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542632828677&di=aa1ddfe45780a60ac39da7615c582a8f&imgtype=0&src=http%3A%2F%2Ftp.yiaedu.com%2Fshowimg.php%3Furl%3Dhttp%3A%2F%2Fuploads.xuexila.com%2Fallimg%2F1703%2F867-1F330164643.jpg', //封面图片地址
-                container: '#video', //“#”代表容器的ID，“.”或“”代表容器的class
-                variable: 'player', //该属性必需设置，值等于下面的new chplayer()的对象
-                video: '../video/video22.mp4', //视频地址
-                volume: 0.6, //默认音量
-                front: '', //前一集按钮点击触发函数，即点击前一集时调用的函数名称，默认为空
-                next: '', //下一集按钮点击触发函数，即点击下一集时调用的函数名称，默认为空
-                html5m3u8: true //hls为true
-                //loop: true //是否循环播放
-            };
-            var player = new chplayer(videoObject);
+            var player = new Aliplayer({
+                "id": "player-con",
+                "source": "http://alcdn.hls.xiaoka.tv/20181120/ce8/58f/37TBqSTgRC78bcUb/index.m3u8",
+                "width": "100%",
+                "height": "250px",
+                "autoplay": false,
+                "isLive": false,
+                "cover": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542865269846&di=fe5d04330cf7321367c32b89d0bff476&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Ffd039245d688d43f4ed85fdf761ed21b0ef43bae.jpg",
+                "rePlay": false,
+                "playsinline": true,
+                "preload": false,
+                "language": "zh-cn",
+                "controlBarVisibility": "click",
+                "showBarTime": 5000,
+                "useH5Prism": true,
+                "skinLayout": [{
+                        "name": "bigPlayButton",
+                        "align": "blabs",
+                        "x": 30,
+                        "y": 80
+                    },
+                    {
+                        "name": "H5Loading",
+                        "align": "cc"
+                    },
+                    {
+                        "name": "errorDisplay",
+                        "align": "tlabs",
+                        "x": 0,
+                        "y": 0
+                    },
+                    {
+                        "name": "infoDisplay"
+                    },
+                    {
+                        "name": "tooltip",
+                        "align": "blabs",
+                        "x": 0,
+                        "y": 56
+                    },
+                    {
+                        "name": "thumbnail"
+                    },
+                    {
+                        "name": "controlBar",
+                        "align": "blabs",
+                        "x": 0,
+                        "y": 0,
+                        "children": [{
+                                "name": "progress",
+                                "align": "blabs",
+                                "x": 0,
+                                "y": 44
+                            },
+                            {
+                                "name": "playButton",
+                                "align": "tl",
+                                "x": 15,
+                                "y": 12
+                            },
+                            {
+                                "name": "timeDisplay",
+                                "align": "tl",
+                                "x": 10,
+                                "y": 7
+                            },
+                            {
+                                "name": "fullScreenButton",
+                                "align": "tr",
+                                "x": 10,
+                                "y": 12
+                            },
+                            {
+                                "name": "volume",
+                                "align": "tr",
+                                "x": 5,
+                                "y": 10
+                            }
+                        ]
+                    }
+                ]
+            }, function (player) {
+                console.log("播放器创建了。");
+            });
             root.newTagToggle(".nav-item", ".nav-text")
         } else if (document.getElementById('login')) {
             // 登陆页面
@@ -303,6 +373,10 @@
             root.sendCode()
             // 发送表单
             root.sendForm(".submit-btn input", ".form-item")
+        } else if (document.getElementById('lessonList')) {
+            // 我的课程页面
+            // 标签切换
+            root.newTagToggle(".bar-item", ".item-text")
         }
     }(window.$, window.wangjiao || (window.wangjiao = {})));
 

@@ -227,7 +227,7 @@ header .header-title {
 .my-les .item-m .les-item .three-ellipsis {
   width: auto;
   font-size: 14px;
-  line-height: 1.2;
+  line-height: 1.4;
   color: #999;
   -webkit-line-clamp: 2;
 }
@@ -305,6 +305,7 @@ input:focus {
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 9999999;
   background-color: #fff;
 }
 .nav-footer ul {
