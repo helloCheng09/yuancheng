@@ -44,10 +44,30 @@
   text-decoration: line-through;
   color: #b9b9b9;
 }
+#videoDet .det-p .det-b .det-item .price-b .pre-price em {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+}
+#videoDet .det-p .det-b .det-item .price-b .pre-price em img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 #videoDet .det-p .det-b .det-item .price-b .off-price {
   font-size: 20px;
   font-weight: bold;
   color: #d93841;
+}
+#videoDet .det-p .det-b .det-item .price-b .off-price em {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+}
+#videoDet .det-p .det-b .det-item .price-b .off-price em img {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 #videoDet .det-p .det-b .video-school {
   color: #b9b9b9;
@@ -67,6 +87,11 @@
 }
 #videoDet .det-p .det-b .video-author span:nth-of-type(2) {
   color: #999;
+}
+#videoDet .det-p .det-b .star-p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 #videoDet .det-p .det-b .video-author .learn-num {
   display: flex;
@@ -122,7 +147,7 @@
   background-color: #fff;
 }
 #videoDet .det-panel .menu-b {
-  padding: 0!important;
+  padding: 0 !important;
 }
 #videoDet .det-panel .det-box {
   padding: 0 8px;
@@ -142,4 +167,43 @@
 #videoDet .det-panel .det-text {
   font-size: 16px;
   line-height: 1.4;
+}
+#videoDet .det-panel .pj-p .none-text {
+  padding: 0 10px;
+  text-align: center;
+  color: #797676;
+}
+#videoDet .det-panel .pj-p .pj-item {
+  margin-left: 10px;
+  padding: 10px 0;
+}
+#videoDet .det-panel .pj-p .pj-item::after {
+  border-color: #ddd;
+}
+#videoDet .det-panel .pj-p .item-b {
+  display: flex;
+}
+#videoDet .det-panel .pj-p .pj-left {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 0 10px ;
+}
+#videoDet .det-panel .pj-p .pj-left img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+#videoDet .det-panel .pj-p .info-r,
+#videoDet .det-panel .pj-p .time-b {
+  margin-bottom: 4px;
+}
+#videoDet .det-panel .pj-p .other-detail {
+  font-size: 13px;
+  color: #797676;
+}
+#videoDet .det-panel .pj-p .time-text {
+  font-size: 13px;
+  color: #797676;
 }

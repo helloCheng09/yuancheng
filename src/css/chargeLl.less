@@ -1,0 +1,100 @@
+@import "./depend/mReset.css";
+#chargeLl {
+    min-height: 100vh;
+    padding-bottom: 59px;
+    background-color: #f5f5f5;
+    .main-show {
+        .input-title {
+            margin-bottom: 20px;
+            padding: 0 10px;
+            .title {
+                font-size: 18px;
+            }
+        }
+        .card-show-p {
+            padding: 0 10px;
+            .card-list {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                .card-item {
+                    width: 48%;
+                    margin-bottom: 10px;
+                    text-align: center;
+                    border-radius: 5px;
+                    border: solid 2px #3783fa;
+                    .card-det {
+                        dd {
+                            line-height: 1.5;
+                            color: #3783fa;
+                        }
+                        .money-num {
+                            line-height: 1.5;
+                            color: #666666;
+                        }
+                    }
+                    .zs-text {
+                        font-size: 14px;
+                        line-height: 2;
+                        color: rgb(255, 109, 109);
+                    }
+                }
+                .card-item-b{
+                    padding: 5px 0;
+                }
+                .select {
+                    background-color: #3783fa;
+                    .card-det {
+                        dd {
+                            line-height: 1.5;
+                            color: #fff;
+                        }
+                        .money-num {
+                            line-height: 1.5;
+                            color: #fff;
+                        }
+                    }
+                    .zs-text {
+                        font-size: 14px;
+                        line-height: 2;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+    .chongzhi-btn {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 60px;
+        background-color: #fff;
+        .btn-left {
+            padding: 0 15px;
+            .l-text {
+                font-size: 16px;
+                font-weight: bold;
+                color: #ff0000;
+            }
+        }
+        .btn-right {
+            width: 140px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 15px;
+            background-color: #3784fa;
+            .btn-text {
+                color: #fff;
+            }
+        }
+    }
+    .chongzhi-btn::before {
+        border-color: rgb(105, 105, 105);
+    }
+}

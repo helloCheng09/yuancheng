@@ -13,6 +13,33 @@
      * click.js
      */
     (function ($, root) {
+        // 点击星星
+        function clickStart() {
+            var obj = $(".stars-top")
+            var offset = obj.offset()
+            $('.stars-b').on("click", function (e) {
+                var holyWidth = Number($(this).css('width').split('p')[0])
+                var clickWidth = e.offsetX
+                var percent = Math.ceil(clickWidth / holyWidth * 100)
+                var yushu = percent % 10
+              
+                if (0 <= percent && percent < 10) {
+                    percent = 0
+                }else if (90 < percent && percent <= 100) {
+                    percent = 100
+                } else  {
+                    console.log(yushu)
+                    percent = percent - yushu + 10
+                }
+                console.log(percent)
+                var eleWidth = holyWidth * percent / 100 + 'px'
+                console.log(percent / 100)
+                // console.log( holyWidth * percent / 100 + 'px')
+                $(".stars-top .stars").css("width", eleWidth)
+            })
+
+            console.log(offset)
+        }
         // 标签切换
         let newTagToggle = (btn, styleEle, panels) => {
             let curIndex
@@ -21,6 +48,7 @@
             $(btn).unbind()
             $(btn).on("click", function (event) {
                 curIndex = $(this).index()
+                console.log(curIndex)
                 if (curIndex === lastIndex) {
                     // 不变
                     // console.log(123)
@@ -36,10 +64,16 @@
                     $(panels).eq(lastIndex).hide()
                     $(panels).eq(curIndex).show()
                     lastIndex = curIndex;
-                    // 搜索页面回调
-                    if (document.getElementById('lessonSearch')) {
+
+                    if (document.getElementById('centerClass')) {
+                        // 课程中心页面回调
                         root.getMenuData()
                         root.renderSearch(dataid)
+                    } else if (document.getElementById('chargeLl')) {
+                        // 充值中心回调
+                        console.log($(this).find(".money-num"))
+                        let cgNum = $(this).find(".money-num").text().split("元")[0]
+                        $(".l-text span").text(cgNum)
                     }
                 }
 
@@ -100,6 +134,7 @@
             })
         }
 
+        root.clickStart = clickStart
         root.sendForm = sendForm
         root.sendCode = sendCode
         root.showMn = showMn
@@ -194,9 +229,6 @@
             layer.msg("网络错误~~")
 
         }
-
-        // console.log($.param([{"value":"23", "name":"1"}]))
-
         // 课程搜索
         let getMenuData = () => {
             let url = "hhh"
@@ -258,6 +290,9 @@
                     clickable: true,
                 },
             });
+            root.newTagToggle(".bar-item", ".item-text")
+            root.newTagToggle(".hid-item", ".hid-item-b")
+            root.showMn()
 
 
         } else if (document.getElementById('centerUser')) {
@@ -265,10 +300,9 @@
 
         } else if (document.getElementById('lessonSearch')) {
             // 课程搜索
-            console.log("搜索")
             root.newTagToggle(".bar-item", ".item-text")
-            root.newTagToggle(".hid-item", ".hid-item-b")
-            root.showMn()
+            // root.newTagToggle(".hid-item", ".hid-item-b")
+            // root.showMn()
 
         } else if (document.getElementById('videoDet')) {
             // 观看课程
@@ -356,7 +390,8 @@
             }, function (player) {
                 console.log("播放器创建了。");
             });
-            root.newTagToggle(".nav-item", ".nav-text")
+            root.clickStart()
+            root.newTagToggle(".nav-item", ".nav-text", ".det-panel")
         } else if (document.getElementById('login')) {
             // 登陆页面
 
@@ -377,6 +412,10 @@
             // 我的课程页面
             // 标签切换
             root.newTagToggle(".bar-item", ".item-text")
+        } else if (document.getElementById('chargeLl')) {
+            // 充值
+            // 充值标签切换
+            root.newTagToggle(".card-item", ".card-item-b")
         }
     }(window.$, window.wangjiao || (window.wangjiao = {})));
 

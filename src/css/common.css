@@ -161,6 +161,34 @@ header .header-title {
 .tujian-class .video-box ul .video-item .video-des {
   line-height: 2;
 }
+.stars-b {
+  position: relative;
+  height: 20px;
+  width: 150px;
+}
+.stars-b .stars-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150px;
+  height: 100%;
+}
+.stars-b .stars-top .stars {
+  width: 50%;
+}
+.stars-b .stars-bot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150px;
+  height: 100%;
+}
+.stars-b .stars {
+  height: 100%;
+  background-size: 150px 20px;
+  background-position: left;
+  background-repeat: no-repeat;
+}
 .my-les ul {
   font-size: 0;
 }
