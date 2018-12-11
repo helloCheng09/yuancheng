@@ -161,33 +161,61 @@ header .header-title {
 .tujian-class .video-box ul .video-item .video-des {
   line-height: 2;
 }
+.star-p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.star-tc {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 80px 30px;
+}
+.pj-btn-b {
+  padding: 0 40px;
+  margin-bottom: 20px;
+}
+.pj-btn {
+  width: 100%;
+  line-height: 2;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  background-color: #feca52;
+  color: #ffff;
+}
 .stars-b {
   position: relative;
   height: 20px;
-  width: 150px;
+  width: 110px;
+  margin-right: 40px;
 }
 .stars-b .stars-top {
   position: absolute;
   top: 0;
   left: 0;
-  width: 150px;
+  width: 110px;
   height: 100%;
 }
 .stars-b .stars-top .stars {
-  width: 50%;
+  width: 100%;
 }
 .stars-b .stars-bot {
   position: absolute;
   top: 0;
   left: 0;
-  width: 150px;
+  width: 110px;
   height: 100%;
 }
 .stars-b .stars {
   height: 100%;
-  background-size: 150px 20px;
+  background-size: 110px 20px;
   background-position: left;
   background-repeat: no-repeat;
+}
+.stars-text .text-con {
+  color: #5b5858;
 }
 .my-les ul {
   font-size: 0;

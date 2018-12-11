@@ -88,7 +88,7 @@
 #videoDet .det-p .det-b .video-author span:nth-of-type(2) {
   color: #999;
 }
-#videoDet .det-p .det-b .star-p {
+#videoDet .det-p .det-b .star-tc {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -168,6 +168,12 @@
   font-size: 16px;
   line-height: 1.4;
 }
+#videoDet .det-panel .pj-p .star-p {
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 #videoDet .det-panel .pj-p .none-text {
   padding: 0 10px;
   text-align: center;
@@ -187,7 +193,7 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  margin: 0 10px ;
+  margin: 0 10px;
 }
 #videoDet .det-panel .pj-p .pj-left img {
   display: block;

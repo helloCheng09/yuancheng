@@ -13,33 +13,104 @@
      * click.js
      */
     (function ($, root) {
+        // 打开评分
+        function clickPingf() {
+            $(".pf_btn").on("click", function () {
+                layui.use('layer', function () {
+                    var layer = layui.layer;
+                    layer.open({
+                        type: 1,
+                        shadeClose: true,
+                        anim: 3,
+                        content: `
+                        
+                        <div class="star-tc">
+                        <div class="stars-b stars_btn">
+                            <div class="stars-top ">
+                                <div class="stars" style="background-image:url(../img/starsShi.png)"></div>
+                            </div>
+                            <div class="stars-bot">
+                                <div class="stars" style="background-image:url(../img/starsKong.png)"></div>
+                            </div>
+                        </div>
+                        <div class="stars-text">
+                            <div class="text-con">满意</div>
+                        </div>
+                    </div>
+                    <div class='pj-btn-b'>
+                        <input class='pj-btn' type='button' value = '提交'>
+                    </div>
+                    
+                        ` //这里content是一个普通的String
+                    });
+                    root.clickStart()
+                });
+            })
+        }
         // 点击星星
         function clickStart() {
-            var obj = $(".stars-top")
-            var offset = obj.offset()
-            $('.stars-b').on("click", function (e) {
+            $('.stars_btn').on("click", function (e) {
                 var holyWidth = Number($(this).css('width').split('p')[0])
                 var clickWidth = e.offsetX
                 var percent = Math.ceil(clickWidth / holyWidth * 100)
                 var yushu = percent % 10
-              
+
                 if (0 <= percent && percent < 10) {
                     percent = 0
-                }else if (90 < percent && percent <= 100) {
+                } else if (90 < percent && percent <= 100) {
                     percent = 100
-                } else  {
-                    console.log(yushu)
+                } else {
                     percent = percent - yushu + 10
                 }
+                var pfText = ''
                 console.log(percent)
-                var eleWidth = holyWidth * percent / 100 + 'px'
-                console.log(percent / 100)
-                // console.log( holyWidth * percent / 100 + 'px')
-                $(".stars-top .stars").css("width", eleWidth)
-            })
+                // 一般 还行 不错 满意 超赞
+                switch (percent) {
+                    case 0:
+                        pfText = "一般"
+                        break;
+                    case 10:
+                        pfText = "一般"
+                        break;
+                    case 20:
+                        pfText = "还行"
+                        break;
+                    case 30:
+                        pfText = "还行"
+                        break;
+                    case 40:
+                        pfText = "不错"
+                        break;
+                    case 10:
+                        pfText = "不错"
+                        break;
+                    case 50:
+                        pfText = "不错"
+                        break;
+                    case 60:
+                        pfText = "满意"
+                        break;
+                    case 70:
+                        pfText = "满意"
+                        break;
+                    case 80:
+                        pfText = "满意"
+                        break;
+                    case 90:
+                        pfText = "满意"
+                        break;
+                    case 100:
+                        pfText = "超赞"
+                        break;
 
-            console.log(offset)
+                }
+                $(".star-tc .text-con").text(pfText)
+                var eleWidth = holyWidth * percent / 100 + 'px'
+                // console.log( holyWidth * percent / 100 + 'px')
+                $(".stars_btn .stars-top .stars").css("width", eleWidth)
+            })
         }
+
         // 标签切换
         let newTagToggle = (btn, styleEle, panels) => {
             let curIndex
@@ -134,6 +205,7 @@
             })
         }
 
+        root.clickPingf = clickPingf
         root.clickStart = clickStart
         root.sendForm = sendForm
         root.sendCode = sendCode
@@ -390,7 +462,8 @@
             }, function (player) {
                 console.log("播放器创建了。");
             });
-            root.clickStart()
+
+            root.clickPingf()
             root.newTagToggle(".nav-item", ".nav-text", ".det-panel")
         } else if (document.getElementById('login')) {
             // 登陆页面

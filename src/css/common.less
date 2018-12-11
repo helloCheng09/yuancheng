@@ -178,33 +178,66 @@ header {
         }
     }
 }
+
 // 评分
-.stars-b{
+.star-p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.star-tc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 80px 30px;
+}
+.pj-btn-b {
+    padding: 0 40px;
+    margin-bottom: 20px;
+
+}
+.pj-btn{
+    width: 100%;
+    line-height:2;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    background-color: #feca52;
+    color: #ffff;
+}
+.stars-b {
     position: relative;
     height: 20px;
-    width: 150px;
-    .stars-top{
+    width: 110px;
+    margin-right: 40px;
+    .stars-top {
         position: absolute;
         top: 0;
         left: 0;
-        width: 150px;
+        width: 110px;
         height: 100%;
-        .stars{
-            width: 50%;
+        .stars {
+            width: 100%;
         }
     }
-    .stars-bot{
+    .stars-bot {
         position: absolute;
         top: 0;
         left: 0;
-        width: 150px;
+        width: 110px;
         height: 100%;
     }
-    .stars{
+    .stars {
         height: 100%;
-        background-size:150px 20px;
-        background-position:left;
+        background-size: 110px 20px;
+        background-position: left;
         background-repeat: no-repeat;
+    }
+    
+}
+.stars-text {
+    .text-con {
+        color: #5b5858;
     }
 }
 // 我的课程列表
@@ -315,7 +348,6 @@ input:focus {
 }
 
 // 注册  
-
 .main-show {
     margin-top: 40px;
     .register-title {
@@ -327,7 +359,7 @@ input:focus {
             color: #3784fa;
         }
     }
-    .form-item{
+    .form-item {
         .sent-btn {
             float: right;
             min-width: 98px;
@@ -338,14 +370,12 @@ input:focus {
             padding: 0px 9px;
             color: rgb(153, 153, 153);
         }
-
         .sent-btn::before {
             border-radius: 10px;
             border-color: rgb(153, 153, 153);
         }
     }
-
-    .btn-b{
+    .btn-b {
         margin-top: 80px;
     }
 }
