@@ -70,18 +70,18 @@
                         </div>
                         <!-- <div class="stars-b stars_btn">
                             <div class="stars-top ">
-                                <div class="stars" style="background-image:url(../img/starsShi.png)"></div>
+                                <img src="../img/starsShi.png" alt="" class="img-star">
                             </div>
                             <div class="stars-bot">
-                                <div class="stars" style="background-image:url(../img/starsKong.png)"></div>
+                                <img src="../img/starsKong.png" alt="" class="img-star">
                             </div>
                         </div>
                         <div class="stars-text">
                             <div class="text-con">满意</div>
                         </div> -->
-                        <div class="join-btn">
+                        <!-- <div class="join-btn">
                             <div>加入学习</div>
-                        </div>
+                        </div> -->
                     </div>
 
                 </div>
@@ -108,7 +108,7 @@
                 </div>
             </div>
         </div>
-        <div class="det-panel" style="display:none;">
+        <div class="det-panel">
             <div class="det-p-det">
                 <div class="common-t-one">
                     <span class="title-text">
@@ -185,7 +185,7 @@
                 </div>
             </div>
         </div>
-        <div class="det-panel">
+        <div class="det-panel" style="display:none;">
             <div class="det-p-det">
                 <div class="common-t-one">
                     <span class="title-text">
@@ -267,10 +267,69 @@
         </div>
     </div>
 
-    <!-- js -->   
-    <script type='text/javascript' src="../js/depend/layui/layui.js"></script>
+    <!-- <div class="prevent-play pre_play_b"> -->
+    <!-- <div class="ts-b">
+            <div class="ts-text">
+                立刻加入学习观看！~
+            </div>
+        </div>
+        <div class="join-btn join_btn">
+            <div>加入学习</div>
+        </div> -->
+    <!-- <img class="loading-one" src='../img/loading.gif' alt="">
+    </div> -->
+    <!-- js -->
+    <script>
+        // 分数发送后台地址
+        var pfUrl = "http://www.mamawozaizhe.com/videos/videos/videos_reply.html"
+        var pingfenHtml =
+            `
+                        <div class="star-tc">
+                        <div class="stars-b stars_btn">
+                            <div class="stars-top ">
+                                <div class="stars" style="background-image:url(../img/starsShi.png)"></div>
+                            </div>
+                            <div class="stars-bot">
+                                <div class="stars" style="background-image:url(../img/starsKong.png)"></div>
+                            </div>
+                        </div>
+                        <div class="stars-text">
+                            <div class="text-con">满意</div>
+                        </div>
+                    </div>
+                    <div class='pj-btn-b'>
+                            <input class='pj-btn' type='button' value = '提交'>
+                    </div>
+                        `
+
+        // 加载动画1 
+        var loadingOne =
+            `
+                    <img class="loading-one" src='/public/yz/videos/img/loading.gif' alt="">
+                `
+        var loadingTwo =
+            `
+                    <div class="pj-btn">
+                        <img class="loading-one" src='../img/loading.gif' alt="">
+                    </div>
+        `
+        var lessonGet = 'http://www.mamawozaizhe.com/videos/videos/videos_join.html'
+        var lessonData = {
+            fansid: "40861",
+            froms: "2",
+            lesson_id: "2",
+            traffic_coin: "100",
+            videos_id: "2"
+        }
+        var viedoSrc = 'http://alcdn.hls.xiaoka.tv/20181120/ce8/58f/37TBqSTgRC78bcUb/index.m3u>';
+        var coverSrc =
+            'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542865269846&di=fe5d04330cf7321367c32b89d0bff476&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Ffd039245d688d43f4ed85fdf761ed21b0ef43bae.jpg';
+        var is_buy_lesson = 1;
+        console.log(is_buy_lesson, lessonData)
+    </script>
+    <script type='text/javascript' src="../js/depend/layui/layui.all.js"></script>
     <script type='text/javascript' src="../js/index.js"></script>
- 
+
 </body>
 
 </html>

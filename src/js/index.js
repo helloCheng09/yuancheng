@@ -13,42 +13,56 @@
      * click.js
      */
     (function ($, root) {
+        // 确认加入学习
+        function jionStudy(text) {
+            $(".join_btn").on("click", function () {
+                // #feca52
+                var index = layer.confirm(text, {
+                    btn: ['确定', '取消'] //可以无限个按钮
+                        ,
+                    yes: function (index, layero) {
+                        //按钮【按钮一】的回调
+                        console.log(lessonGet, lessonData)
+                        root.modeAjaxPost(lessonGet, lessonData)
+                        layer.close(index);
+                    },
+                    btn1: function () {
+
+                        return false
+                        //return false 开启该代码可禁止点击该按钮关闭
+                    }
+                });
+                layer.title('', index)
+            })
+        }
+
         // 打开评分
         function clickPingf() {
             $(".pf_btn").on("click", function () {
                 layui.use('layer', function () {
                     var layer = layui.layer;
-                    layer.open({
+                    var index = layer.open({
                         type: 1,
                         shadeClose: true,
-                        anim: 3,
-                        content: `
-                        
-                        <div class="star-tc">
-                        <div class="stars-b stars_btn">
-                            <div class="stars-top ">
-                                <div class="stars" style="background-image:url(../img/starsShi.png)"></div>
-                            </div>
-                            <div class="stars-bot">
-                                <div class="stars" style="background-image:url(../img/starsKong.png)"></div>
-                            </div>
-                        </div>
-                        <div class="stars-text">
-                            <div class="text-con">满意</div>
-                        </div>
-                    </div>
-                    <div class='pj-btn-b'>
-                        <input class='pj-btn' type='button' value = '提交'>
-                    </div>
-                    
-                        ` //这里content是一个普通的String
+                        content: pingfenHtml //这里content是一个普通的String
                     });
                     root.clickStart()
+                    layer.title('课程评分', index)
                 });
+
             })
+
         }
         // 点击星星
         function clickStart() {
+            var fansid = lessonData.fansid
+            var videos_id = lessonData.videos_id
+            var dataObj = {
+                fansid: fansid,
+                videos_id: videos_id,
+                scores: 10,
+                content: "超赞",
+            }
             $('.stars_btn').on("click", function (e) {
                 var holyWidth = Number($(this).css('width').split('p')[0])
                 var clickWidth = e.offsetX
@@ -62,8 +76,8 @@
                 } else {
                     percent = percent - yushu + 10
                 }
+                
                 var pfText = ''
-                console.log(percent)
                 // 一般 还行 不错 满意 超赞
                 switch (percent) {
                     case 0:
@@ -104,10 +118,34 @@
                         break;
 
                 }
+                // var lessonData = {
+                //     fansid: "40861",
+                //     froms: "2",
+                //     lesson_id: "2",
+                //     traffic_coin: "100",
+                //     videos_id: "2"
+                // }
+                // 讲0 -100转为 0 -10
+                var scores = percent / 10
                 $(".star-tc .text-con").text(pfText)
                 var eleWidth = holyWidth * percent / 100 + 'px'
                 // console.log( holyWidth * percent / 100 + 'px')
                 $(".stars_btn .stars-top .stars").css("width", eleWidth)
+                // 获取评分数据传后台
+                dataObj.scores = scores
+                dataObj.content = pfText
+                console.log(dataObj)
+                root.subPf(dataObj)
+            })
+        }
+
+        // 提交评分
+        function subPf(data) {
+            $(".pj-btn-b .pj-btn").off("click")
+            $(".pj-btn-b .pj-btn").on("click", function () {
+                // pfUrl定义在html
+                console.log(123124)
+                root.modeAjaxPostSec(pfUrl, data)
             })
         }
 
@@ -176,9 +214,7 @@
         }
         // 发送二维码
         let sendCode = () => {
-            console.log(555)
             $("#sendCode").on("click", function () {
-                console.log(1234)
                 $(this).text("60s后重发")
                 let ele = $(this)
                 let num = 60
@@ -205,6 +241,8 @@
             })
         }
 
+        root.subPf = subPf
+        root.jionStudy = jionStudy
         root.clickPingf = clickPingf
         root.clickStart = clickStart
         root.sendForm = sendForm
@@ -219,6 +257,15 @@
      * render.js
      */
     (function ($, root) {
+        // 提交评分成功
+        let renderPf = (result) => {
+            if (result.msg == "success") {
+                layer.msg('评分提交成功')
+            } else {
+                layer.msg('评分提交失败')
+            }
+        }
+        root.renderPf = renderPf
         // 渲染课程搜索的 一级分类
         let renderSearch = (id) => {
             // 关闭隐藏
@@ -233,7 +280,67 @@
 
             console.log(id)
         }
+        // 加入学习 反馈
+        let msgDet = (response) => {
 
+            switch (response) {
+                case 1:
+                    $(".pre_play_b").remove()
+                    layui.use('layer', function () {
+                        var layer = layui.layer;
+                        layer.msg('成功加入学习');
+                    });
+                    break;
+                case 2:
+                    root.appendDetVideoBtn()
+                    layui.use('layer', function () {
+                        var layer = layui.layer;
+                        layer.msg('失败，你已经有该课程');
+
+                    });
+                    break;
+                case 3:
+                    root.appendDetVideoBtn()
+                    layui.use('layer', function () {
+                        var layer = layui.layer;
+                        layer.msg('失败，流量币不足');
+                    });
+                    break;
+                case 4:
+                    root.appendDetVideoBtn()
+                    layui.use('layer', function () {
+                        var layer = layui.layer;
+                        layer.msg('失败，交易失败');
+                    });
+                    break;
+            }
+        }
+
+        let appendDetVideoBtn = () => {
+            var html = `
+                <div class="ts-b">
+                    <div class="ts-text">
+                        立刻加入学习观看！~
+                    </div>
+                </div>
+                <div class="btn-b">
+                     <div class="join-btn join_btn">
+                    <div>加入学习</div>
+                    </div> 
+                    <div class="charge-btn">
+                        <a>充流量币</a>
+                    </div> 
+                    </div>
+            `
+            $(".pre_play_b").empty()
+            $(".pre_play_b").append(html)
+            // 购买失败，在购买
+            var money = $("")
+            var text = '本课程88流量币，是否确认购买？'
+            root.jionStudy(text)
+        }
+        root.appendDetVideoBtn = appendDetVideoBtn
+        root.msgDet = msgDet
         root.renderSearch = renderSearch
     }(window.$, window.wangjiao || (window.wangjiao = {})));
 
@@ -271,6 +378,34 @@
             }
         }
 
+        let ifBuyLes = (status, callback) => {
+            if (status != 1) {
+                var html = `
+                <div class="prevent-play pre_play_b">
+                    <div class="ts-b">
+                        <div class="ts-text">
+                            立刻加入学习观看！~
+                        </div>
+                    </div>
+                    <div class="btn-b">
+                         <div class="join-btn join_btn">
+                        <div>加入学习</div>
+                        </div> 
+                        <div class="charge-btn">
+                            <a>充流量币</a>
+                        </div> 
+                        </div>
+                </div>
+                `
+                $("body").append(html)
+            } else {
+
+            }
+            callback()
+
+        }
+        root.ifBuyLes = ifBuyLes
+
         root.dealFormData = dealFormData
     }(window.$, window.wangjiao || (window.wangjiao = {})));
 
@@ -283,15 +418,32 @@
         let modeAjaxPost = (url, data) => {
             $.ajax({
                 type: "POST",
-                url: "some.php",
+                url: url,
                 data: data,
                 dataType: "JSON",
-                // beforeSend :,
-                success: function (msg) {
-                    console.log("Data Saved: " + msg);
-                    // 回调渲染入口
-
-
+                beforeSend: beforeFn,
+                success: function (result) {
+                    console.log(result)
+                    if (document.getElementById('videoDet')) {
+                        var res = result.code
+                        root.msgDet(res)
+                    }
+                },
+                error: error
+            })
+        }
+        let modeAjaxPostSec = (url, data) => {
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: data,
+                dataType: "JSON",
+                beforeSend: beforeFnSec,
+                success: function (result) {
+                    console.log(result)
+                    if (document.getElementById('videoDet')) {
+                        root.renderPf(result)
+                    }
                 },
                 error: error
             })
@@ -299,7 +451,18 @@
         // error
         let error = () => {
             layer.msg("网络错误~~")
-
+        }
+        let beforeFn = () => {
+            if (document.getElementById('videoDet')) {
+                $(".pre_play_b").empty()
+                $(".pre_play_b").append(loadingOne)
+            }
+        }
+        let beforeFnSec = () => {
+            if (document.getElementById('videoDet')) {
+                $(".pj-btn-b").empty()
+                $(".pj-btn-b").append(loadingTwos)
+            }
         }
         // 课程搜索
         let getMenuData = () => {
@@ -319,6 +482,8 @@
             modeAjaxPost(url, formData)
         }
 
+        root.modeAjaxPostSec = modeAjaxPostSec
+        root.modeAjaxPost = modeAjaxPost
         root.sendDataRegister = sendDataRegister
         root.getCode = getCode
         root.getMenuData = getMenuData
@@ -377,15 +542,22 @@
             // root.showMn()
 
         } else if (document.getElementById('videoDet')) {
+            // 判断是否买了课程
+            root.ifBuyLes(is_buy_lesson, function () {
+                // 如果没有购买课程，提示购买
+                var text = '本课程88流量币，是否确认购买？'
+                root.jionStudy(text)
+            })
+
             // 观看课程
             var player = new Aliplayer({
                 "id": "player-con",
-                "source": "http://alcdn.hls.xiaoka.tv/20181120/ce8/58f/37TBqSTgRC78bcUb/index.m3u8",
+                "source": viedoSrc,
                 "width": "100%",
                 "height": "250px",
                 "autoplay": false,
                 "isLive": false,
-                "cover": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542865269846&di=fe5d04330cf7321367c32b89d0bff476&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Ffd039245d688d43f4ed85fdf761ed21b0ef43bae.jpg",
+                "cover": coverSrc,
                 "rePlay": false,
                 "playsinline": true,
                 "preload": false,
@@ -462,6 +634,7 @@
             }, function (player) {
                 console.log("播放器创建了。");
             });
+            // 确认加入学习
 
             root.clickPingf()
             root.newTagToggle(".nav-item", ".nav-text", ".det-panel")

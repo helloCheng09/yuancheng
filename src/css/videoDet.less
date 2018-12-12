@@ -150,7 +150,7 @@
         }
     }
     .det-panel {
-        padding: 15px 0 10px;
+        padding: 15px 0 0px;
         background-color: #fff;
         .det-p-det {}
         .menu-b {
@@ -188,18 +188,6 @@
                 justify-content: space-between;
                 align-items: center;
             }
-            .none-text {
-                padding: 0 10px;
-                text-align: center;
-                color: rgb(121, 118, 118);
-            }
-            .pj-item {
-                margin-left: 10px;
-                padding: 10px 0;
-            }
-            .pj-item::after {
-                border-color: #ddd;
-            }
             .item-b {
                 display: flex;
             }
@@ -229,4 +217,65 @@
             }
         }
     }
+}
+
+.prevent-play {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999999;
+    background-color: rgba(0, 0, 0, 0.8);
+    .ts-b {
+        line-height: 3;
+        font-size: 18px;
+        color: #fff;
+    }
+    .loading-one {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+    }
+
+    .btn-b{
+        
+        display: flex;
+        width: 60%;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .join-btn {
+        margin: 5px 10px 0;
+        text-align: right;
+        div {
+            display: inline-block;
+            padding: 0 10px;
+            border-radius: 5px;
+            line-height: 2;
+            color: #fff;
+            background-color: #feca52;
+        }
+    }
+    .charge-btn {
+        margin: 5px 10px 0;
+        text-align: right;
+        a {
+            display: inline-block;
+            padding: 0 10px;
+            border-radius: 5px;
+            line-height: 2;
+            color: #fff;
+            background-color: #3784fa;
+        }
+    }
+}
+
+.layui-layer-btn .layui-layer-btn0 {
+    border-color: #feca52 !important;
+    background-color: #feca52 !important;
 }
