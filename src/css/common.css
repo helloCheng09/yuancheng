@@ -185,7 +185,8 @@ header .header-title {
 }
 .pj-btn {
   width: 100%;
-  line-height: 40px;
+  height: 42px;
+  line-height: 42px;
   border: none;
   outline: none;
   border-radius: 4px;

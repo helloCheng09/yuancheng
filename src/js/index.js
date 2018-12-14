@@ -63,6 +63,7 @@
                 scores: 10,
                 content: "超赞",
             }
+            root.subPf(dataObj)
             $('.stars_btn').on("click", function (e) {
                 var holyWidth = Number($(this).css('width').split('p')[0])
                 var clickWidth = e.offsetX
@@ -76,7 +77,7 @@
                 } else {
                     percent = percent - yushu + 10
                 }
-                
+
                 var pfText = ''
                 // 一般 还行 不错 满意 超赞
                 switch (percent) {
@@ -141,6 +142,7 @@
 
         // 提交评分
         function subPf(data) {
+            console.log(123124)
             $(".pj-btn-b .pj-btn").off("click")
             $(".pj-btn-b .pj-btn").on("click", function () {
                 // pfUrl定义在html
@@ -261,8 +263,13 @@
         let renderPf = (result) => {
             if (result.msg == "success") {
                 layer.msg('评分提交成功')
+                setTimeout(function () {
+                    layer.closeAll()
+                }, 3000)
             } else {
-                layer.msg('评分提交失败')
+                $(".pj_btn_b").empty()
+                $(".pj_btn_b").append(`<input class='pj-btn' type='button' value = '提交'>`)
+                layer.msg('评分失败~~111')
             }
         }
         root.renderPf = renderPf
@@ -451,6 +458,30 @@
         // error
         let error = () => {
             layer.msg("网络错误~~")
+            if (document.getElementById('videoDet')) {
+                var html = `
+                <div class="ts-b">
+                    <div class="ts-text">
+                        立刻加入学习观看！~
+                    </div>
+                </div>
+                <div class="btn-b">
+                     <div class="join-btn join_btn">
+                    <div>加入学习</div>
+                    </div> 
+                    <div class="charge-btn">
+                        <a>充流量币</a>
+                    </div> 
+                    </div>
+                `
+                $(".pre_play_b").empty()
+                $(".pre_play_b").append(html)
+                $(".pj_btn_b").empty()
+                $(".pj_btn_b").append(`<input class='pj-btn' type='button' value = '提交'>`)
+                setTimeout(function () {
+                    layer.closeAll()
+                }, 3000)
+            }
         }
         let beforeFn = () => {
             if (document.getElementById('videoDet')) {
@@ -460,8 +491,8 @@
         }
         let beforeFnSec = () => {
             if (document.getElementById('videoDet')) {
-                $(".pj-btn-b").empty()
-                $(".pj-btn-b").append(loadingTwos)
+                $(".pj_btn_b").empty()
+                $(".pj_btn_b").append(loadingTwo)
             }
         }
         // 课程搜索
