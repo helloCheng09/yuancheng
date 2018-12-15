@@ -13,6 +13,37 @@
      * click.js
      */
     (function ($, root) {
+        // 搜索页面获取 防抖
+        /**
+         * getSearchVal
+         * @param {inputId, url , ajaxFn, delay} obj 
+         */
+        function getSearchVal(obj) {
+            var inputId = obj.inputId
+            var ajaxFn = obj.ajaxFn
+            var delay = obj.delay
+            var searUrl = obj.url
+            var oInput = document.getElementById(inputId)
+            var timer = null
+
+            oInput.oninput = function (e) {
+                var _self = this
+                var _arg = arguments
+
+                clearTimeout(timer)
+                timer = setTimeout(() => {
+
+                    // 把值和事件源传给ajax
+                    var sentData = {
+                        keywords: _self.value,
+                        page: 1
+                    }
+                    console.log(sentData)
+                    ajaxFn(searUrl, sentData)
+                }, delay);
+            }
+        }
+        root.getSearchVal = getSearchVal
         // 确认加入学习
         function jionStudy(text) {
             $(".join_btn").on("click", function () {
@@ -159,7 +190,7 @@
             $(btn).unbind()
             $(btn).on("click", function (event) {
                 curIndex = $(this).index()
-                console.log(curIndex)
+
                 if (curIndex === lastIndex) {
                     // 不变
                     // console.log(123)
@@ -175,16 +206,27 @@
                     $(panels).eq(lastIndex).hide()
                     $(panels).eq(curIndex).show()
                     lastIndex = curIndex;
-
                     if (document.getElementById('centerClass')) {
                         // 课程中心页面回调
                         root.getMenuData()
                         root.renderSearch(dataid)
                     } else if (document.getElementById('chargeLl')) {
                         // 充值中心回调
-                        console.log($(this).find(".money-num"))
                         let cgNum = $(this).find(".money-num").text().split("元")[0]
                         $(".l-text span").text(cgNum)
+                        console.log('充值中西：' + curIndex)
+                        var data_id = $(this).data('id')
+                        $("#chargeLink").attr("href", chargeLink + "&data_id=" + data_id)
+                    } else if (document.getElementById('lessonSearch')) {
+                        console.log('课程搜索：' + curIndex)
+                        // froms
+                        // 取标签参数 发送后台 关键字 froms  page
+                        var obj = {}
+                        var froms = $(this).data('id')
+                        obj.froms = froms
+                        obj.page = 1
+                        console.log(obj)
+                        root.modeAjaxPost(searUrl, obj)
                     }
                 }
 
@@ -252,13 +294,152 @@
         root.showMn = showMn
         root.newTagToggle = newTagToggle
     }(window.$, window.wangjiao || (window.wangjiao = {})));
-
     /****************************************************************************** */
     /**
      * 渲染
      * render.js
      */
     (function ($, root) {
+        // 渲染课程中心的课程
+        function renderLesCont(data) {
+            var data = data.data
+            var lesConHtml = ''
+            $.each(data, function (index, item) {
+                var id = item.id
+                var shoufei = item.froms
+                var img = item.img
+                var school_name = item.school_name
+                var name = item.name
+                var teacher_name = item.teacher_name
+                var title = item.title
+                if (shoufei == 1) {
+                    shoufei = '公益课'
+                } else {
+                    shoufei = '付费课'
+                    teacher_name += '(' + school_name + ')'
+                }
+
+                lesConHtml += `
+                <li class="item-m  mob_1px_b" data-id="${id}">
+                        <a href="http://www.mamawozaizhe.com/videos/videos/video_det.html?lesson_id=${id}" class="item-link">
+                            <div class="item-b">
+                                <div class="les-item-l">
+                                    <div class="img-b">
+                                    <div class="img-show" style="background-image:url(${img})"></div>
+                                    </div>
+                                </div>
+                                <div class="les-item-r">
+                                    <div class="les-item les-title">
+                                        <h3 class="les-text one-ellipsis">${name}</h3>
+                                                                                <span class="tag tag-free">${shoufei}</span>
+                                                                            </div>
+                                    <div class="les-item les-title">
+                                        <div class="les-text three-ellipsis">
+                                        ${title}                                      
+                                        </div>
+                                    </div>
+                                    <div class="les-item les-title">
+                                        <div class="les-text one-ellipsis les-author">${teacher_name}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                
+                `
+            })
+
+            $('.les_con_list').empty().append(lesConHtml)
+        }
+        root.renderLesCont = renderLesCont
+        // 渲染课程中心的课程分类标签
+        function renderFenleiTag(data) {
+            console.log(data)
+            // 取最后一类
+            var len = data.length
+            var lastTag = data[len - 1][0]
+            var finalId = lastTag.id
+            var lesDataObj = {
+                cate_id: finalId,
+                page: 1,
+            }
+
+            var tagListPanel = ''
+            // 把最后一个标签id发送后台，渲染页面
+            root.modeAjaxGetSec(kechengUrl, lesDataObj)
+            $.each(data, function (index, item) {
+                tagListPanel = `
+                        <div class="menu-bar">
+                            <div class="bar-list">
+                                <ul class="les_tag_list">
+                                </ul>
+                            </div>
+                        </div>
+                    `
+                $('.insert_con_list').append(tagListPanel)
+                var tagListIn = ''
+                $.each(item, function (index2, item2) {
+                    console.log(item2)
+                    var id = item2.id
+                    var name = item2.name
+                    // var previd = item2.previd
+                    if (index2 != 0) {
+                        tagListIn += `
+                        <li class="bar-item" data-id="${id}">
+                            <div class="item-text">${name}</div>
+                        </li>
+                    `
+                    } else {
+                        tagListIn += `
+                        <li class="bar-item" data-id="${id}">
+                            <div class="item-text select">${name}</div>
+                        </li>
+                    `
+                    }
+
+                });
+                $('.insert_con_list .menu-bar').eq(index).find('.les_tag_list').append(tagListIn)
+                // 绑定标签切换事件事件
+                // root (".bar-item", ".item-text")
+            })
+            var demo = `
+                <div class="menu-bar">
+                    <div class="bar-list">
+                        <ul class="les_tag_list">
+                            <li class="bar-item" data-id="0">
+                                <div class="item-text select">全部</div>
+                            </li>
+                            <li class="bar-item" data-id="4">
+                                <div class="item-text">书法</div>
+                            </li>
+                            <li class="bar-item" data-id="5">
+                                <div class="item-text">国画</div>
+                            </li>
+                            <li class="bar-item" data-id="6">
+                                <div class="item-text">古文</div>
+                            </li>
+                            <li class="bar-item" data-id="36">
+                                <div class="item-text">汉字字源</div>
+                            </li>
+                            <li class="bar-item" data-id="39">
+                                <div class="item-text">汉字的来源</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            `
+
+        }
+        root.renderFenleiTag = renderFenleiTag
+        // 渲染搜索
+        let searchRender = (data) => {
+            console.log(data)
+            var searHtml = ''
+            $.each(searList, function (index, item) {
+
+            })
+        }
+        root.searchRender = searchRender
         // 提交评分成功
         let renderPf = (result) => {
             if (result.msg == "success") {
@@ -335,7 +516,7 @@
                     <div>加入学习</div>
                     </div> 
                     <div class="charge-btn">
-                        <a>充流量币</a>
+                        <a href='${chargeSrc}' class='charge_link'>充流量币</a>
                     </div> 
                     </div>
             `
@@ -399,7 +580,7 @@
                         <div>加入学习</div>
                         </div> 
                         <div class="charge-btn">
-                            <a>充流量币</a>
+                            <a href='${chargeSrc}' class='charge_link'>充流量币</a>
                         </div> 
                         </div>
                 </div>
@@ -434,6 +615,10 @@
                     if (document.getElementById('videoDet')) {
                         var res = result.code
                         root.msgDet(res)
+                    } else if (document.getElementById('lessonSearch')) {
+                        console.log('搜索页面')
+                        var data = result
+                        root.searchRender(data)
                     }
                 },
                 error: error
@@ -470,7 +655,7 @@
                     <div>加入学习</div>
                     </div> 
                     <div class="charge-btn">
-                        <a>充流量币</a>
+                        a href='${chargeSrc}' class='charge_link'>充流量币</a>
                     </div> 
                     </div>
                 `
@@ -500,6 +685,44 @@
             let url = "hhh"
             modeAjaxPost(url)
         }
+        // getMode
+        let modeAjaxGet = (url, data) => {
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: data,
+                dataType: "JSON",
+                beforeSend: beforeFnSec,
+                success: function (result) {
+                    // console.log(result)
+                    if (document.getElementById('centerClass')) {
+                        console.log('课程中心')
+                        root.renderFenleiTag(result)
+                    }
+                },
+                error: error
+            })
+        }
+        root.modeAjaxGet = modeAjaxGet
+        // getMode2
+        let modeAjaxGetSec = (url, data) => {
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: data,
+                dataType: "JSON",
+                beforeSend: beforeFnSec,
+                success: function (result) {
+                    // console.log(result)
+                    if (document.getElementById('centerClass')) {
+                        console.log('课程内容')
+                        root.renderLesCont(result)
+                    }
+                },
+                error: error
+            })
+        }
+        root.modeAjaxGetSec = modeAjaxGetSec
 
         // 获取验证码
         let getCode = () => {
@@ -547,6 +770,15 @@
             });
         } else if (document.getElementById('centerClass')) {
             // 课程中心
+            // 默认第一个分类的id
+            var firstFlId = $('.hid_item').data('id')
+            var fenleiDataObj = {
+                cate_id: "3"
+            }
+            console.log(fenleiDataObj)
+            root.modeAjaxGet(fenleiUrl, fenleiDataObj)
+            // 获取默认分类数据
+            console.log(fenleiUrl)
             // 实例化轮播
             var swiper = new Swiper('.swiper-container', {
                 slidesPerView: 2,
@@ -558,7 +790,7 @@
                     clickable: true,
                 },
             });
-            root.newTagToggle(".bar-item", ".item-text")
+            // root.newTagToggle(".bar-item", ".item-text")
             root.newTagToggle(".hid-item", ".hid-item-b")
             root.showMn()
 
@@ -569,8 +801,12 @@
         } else if (document.getElementById('lessonSearch')) {
             // 课程搜索
             root.newTagToggle(".bar-item", ".item-text")
-            // root.newTagToggle(".hid-item", ".hid-item-b")
-            // root.showMn()
+            root.getSearchVal({
+                inputId: 'searchInputOne',
+                url: searUrl,
+                ajaxFn: root.modeAjaxPost,
+                delay: 1000
+            })
 
         } else if (document.getElementById('videoDet')) {
             // 判断是否买了课程
@@ -666,7 +902,6 @@
                 console.log("播放器创建了。");
             });
             // 确认加入学习
-
             root.clickPingf()
             root.newTagToggle(".nav-item", ".nav-text", ".det-panel")
         } else if (document.getElementById('login')) {

@@ -96,33 +96,60 @@
                     </div>
                     <div class="close-p"></div>
                 </div>
-                <div class="menu-bar">
-                    <div class="bar-list">
-                        <ul>
-                            <li class="bar-item" data-id="0">
-                                <div class="item-text select">全部</div>
-                            </li>
-                            <li class="bar-item" data-id="1">
-                                <div class="item-text">围棋</div>
-                            </li>
-                            <li class="bar-item" data-id="2">
-                                <div class="item-text">国画</div>
-                            </li>
-                            <li class="bar-item" data-id="3">
-                                <div class="item-text">书法</div>
-                            </li>
-                            <li class="bar-item" data-id="4">
-                                <div class="item-text">武术</div>
-                            </li>
-                            <li class="bar-item" data-id="5">
-                                <div class="item-text">舞蹈</div>
-                            </li>
-                        </ul>
+                <div class="insert_con_list">
+                    <div class="menu-bar">
+                        <div class="bar-list">
+                            <ul class="les_tag_list">
+                                <li class="bar-item" data-id="0">
+                                    <div class="item-text select">全部</div>
+                                </li>
+                                <li class="bar-item" data-id="1">
+                                    <div class="item-text">围棋</div>
+                                </li>
+                                <li class="bar-item" data-id="2">
+                                    <div class="item-text">国画</div>
+                                </li>
+                                <li class="bar-item" data-id="3">
+                                    <div class="item-text">书法</div>
+                                </li>
+                                <li class="bar-item" data-id="4">
+                                    <div class="item-text">武术</div>
+                                </li>
+                                <li class="bar-item" data-id="5">
+                                    <div class="item-text">舞蹈</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="menu-bar">
+                        <div class="bar-list">
+                            <ul class="les_tag_list">
+                                <li class="bar-item" data-id="0">
+                                    <div class="item-text select">全部</div>
+                                </li>
+                                <li class="bar-item" data-id="1">
+                                    <div class="item-text">围棋</div>
+                                </li>
+                                <li class="bar-item" data-id="2">
+                                    <div class="item-text">国画</div>
+                                </li>
+                                <li class="bar-item" data-id="3">
+                                    <div class="item-text">书法</div>
+                                </li>
+                                <li class="bar-item" data-id="4">
+                                    <div class="item-text">武术</div>
+                                </li>
+                                <li class="bar-item" data-id="5">
+                                    <div class="item-text">舞蹈</div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
+
             </div>
             <div class="my-les">
-                <ul>
+                <ul class='les_con_list'>
                     <li class="item-m  mob_1px_b" data-id="">
                         <a href="../html/video_det.html" class="item-link">
                             <div class="item-b">
@@ -214,9 +241,15 @@
         </div>
     </div>
 
-    <!-- js -->
-    <script type='text/javascript' src="../js/index.js"></script>
-    <script type='text/javascript' src="../js/depend/layui/layui.js"></script>
 </body>
+<script>
+    // 默认说有分类请求
+    var fenleiUrl = `<?php echo site_url('videos/videos/lessonCate')?>`
+    // 默认说有分类请求
+    var kechengUrl = `<?php echo site_url('videos/videos/lessonList')?>`
+</script>
+<!-- js -->
+<script type='text/javascript' src="../js/depend/layui/layui.all.js"></script>
+<script type='text/javascript' src="../js/index.js"></script>
 
 </html>

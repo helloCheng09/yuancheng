@@ -7,11 +7,136 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>课程搜索</title>
     <!-- css -->
-    <link rel="stylesheet" href="../css/lessonSearch.css">
-    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/lessonSearch.css?t=<?php echo time();?>">
+    <link rel="stylesheet" href="../css/common.css?t=<?php echo time();?>">
     <!-- js -->
     <script type='text/javascript' src="../js/depend/jQuery.min.js"></script>
 </head>
+<style>
+    html,
+body,
+ul,
+li {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+
+body,
+html {
+    line-height: 1;
+    font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    color: #333;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    background: #f2f2f2;
+}
+
+.prolist li {
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #f8f8f8;
+    background: #fff;
+    padding: 0 15px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.prolist li a {
+    color: #333;
+    font-size: 16px;
+}
+
+/**加载效果旋转**/
+@-webkit-keyframes rotate {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotate {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.loadmore {
+    display: block;
+    line-height: 50px;
+    text-align: center;
+    color: #ccc;
+    font-size: 14px;
+}
+
+.loadmore span {
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    display: inline-block;
+    margin: 10px;
+    border: 2px solid #0077ff;
+    border-bottom-color: transparent;
+    vertical-align: middle;
+    -webkit-animation: rotate 1.1s infinite linear;
+    animation: rotate 1.1s infinite linear;
+}
+
+.loadover {
+    position: relative;
+    margin: 0 12px;
+    padding: 24px 0;
+    height: 20px;
+    line-height: 20px;
+    color: #909090;
+    text-align: center;
+}
+
+.loadover span {
+    position: relative;
+    display: inline-block;
+    padding: 0 6px;
+    height: 20px;
+    background: #F2F2F2;
+    z-index: 2;
+}
+
+.loadover:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+    background: #DCDCDC;
+    z-index: 1;
+    display: block;
+}
+</style>
 
 <body>
 
@@ -33,7 +158,7 @@
                         <img src="../img/icon1.png" alt="">
                     </span>
                     <span class="input-b">
-                        <input type="text" placeholder=" 请输入搜索关键字">
+                        <input type="text" id="searchInputOne" placeholder=" 请输入搜索关键字">
                     </span>
                 </a>
             </div>
@@ -110,15 +235,18 @@
                         </a>
                     </li>
                 </ul>
+                <div class="loadmore"><span class="loading"></span>加载中..</div>
             </div>
         </section>
 
-
     </div>
 
-    <!-- js -->
-    <script type='text/javascript' src="../js/index.js"></script>
-    <script type='text/javascript' src="../js/depend/layui/layui.js"></script>
 </body>
+<script>
+    var searUrl = 'http://www.mamawozaizhe.com/videos/videos/search_list'
+</script>
+<!-- js -->
+<script type='text/javascript' src="../js/depend/layui/layui.all.js"></script>
+<script type='text/javascript' src="../js/index.js?t=<?php echo time();?>"></script>
 
 </html>
