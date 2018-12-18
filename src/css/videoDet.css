@@ -6,7 +6,7 @@
 }
 #videoDet header {
   position: absolute;
-  z-index: 999;
+  z-index: 999999;
   left: 0;
   right: 0;
   background-color: transparent;
@@ -32,7 +32,10 @@
 #videoDet .det-p .det-b .title-b h3 {
   font-size: 18px;
   font-weight: normal;
-  line-height: 1.2;
+  line-height: 1.5;
+}
+#videoDet .det-p .det-b .det-item .teji-show {
+  display: flex;
 }
 #videoDet .det-p .det-b .det-item .price-b {
   float: right;
@@ -70,16 +73,19 @@
   height: 100%;
 }
 #videoDet .det-p .det-b .video-school {
+  padding: 0 26px;
   color: #b9b9b9;
 }
 #videoDet .det-p .det-b .video-author {
-  line-height: 1.4;
+  height: 30px;
+  line-height: 30px;
+  padding-right: 10px;
 }
 #videoDet .det-p .det-b .video-author span:nth-of-type(1) {
   display: inline-block;
-  width: 18px;
-  height: 18px;
-  vertical-align: sub;
+  width: 22px;
+  height: 22px;
+  vertical-align: text-top;
 }
 #videoDet .det-p .det-b .video-author span:nth-of-type(1) img {
   display: block;
@@ -158,6 +164,10 @@
 #videoDet .det-panel .det-box .menu-list .fst-list-b .fst-text {
   line-height: 2;
 }
+#videoDet .det-panel .det-box .menu-list .fst-list-b .select {
+  font-weight: bold;
+  color: #3784fa;
+}
 #videoDet .det-panel .det-box .menu-list .list-b {
   line-height: 2;
 }
@@ -206,13 +216,26 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
-  z-index: 999999;
+  height: 250px;
+  z-index: 10000;
   background-color: rgba(0, 0, 0, 0.8);
+}
+.prevent-play .show-les-info {
+  display: none;
+  min-width: 260px;
+  padding: 0 40px;
+  color: #fff;
+}
+.prevent-play .show-les-info .title-info {
+  margin-bottom: 10px;
+}
+.prevent-play .show-les-info .les-info-text p {
+  line-height: 1.4;
+  font-size: 16px;
 }
 .prevent-play .ts-b {
   line-height: 3;

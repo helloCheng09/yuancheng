@@ -70,16 +70,24 @@
         // 打开评分
         function clickPingf() {
             $(".pf_btn").on("click", function () {
-                layui.use('layer', function () {
-                    var layer = layui.layer;
-                    var index = layer.open({
-                        type: 1,
-                        shadeClose: true,
-                        content: pingfenHtml //这里content是一个普通的String
+                if (is_buy_lesson != 1) {
+                    layui.use('layer', function () {
+                        layer.msg('加入学习后才能评价哦~')
                     });
-                    root.clickStart()
-                    layer.title('课程评分', index)
-                });
+                    return false
+                } else {
+                    layui.use('layer', function () {
+                        var layer = layui.layer;
+                        var index = layer.open({
+                            type: 1,
+                            shadeClose: true,
+                            content: pingfenHtml //这里content是一个普通的String
+                        });
+                        root.clickStart()
+                        layer.title('课程评分', index)
+                    });
+                }
+
 
             })
 
@@ -186,30 +194,46 @@
         let newTagToggle = (btn, styleEle, panels) => {
             let curIndex
             let lastIndex = 0
-            let dataid
+            // 课程详情 默认1
+            if (document.getElementById('videoDet')) {
+                lastIndex = 1
+            }
+            if (document.getElementById('centerClass')) {
+                lastIndex = $('.hid_item .select').parent('.hid_item').index()
+                console.log(lastIndex)
+            }
             $(btn).unbind()
-            $(btn).on("click", function (event) {
+            $(btn).on("click", function () {
                 curIndex = $(this).index()
-
                 if (curIndex === lastIndex) {
                     // 不变
-                    // console.log(123)
                     return false;
                 } else {
                     // 样式  
                     if ($(this).attr("data-id")) {
-                        dataid = $(this).attr("data-id")
+                        var dataid = $(this).attr("data-id")
                     }
-                    $(this).find(styleEle).toggleClass("select")
-                    $(btn).eq(lastIndex).find(styleEle).toggleClass("select")
+                    $(btn).find(styleEle).removeClass("select")
+                    $(this).find(styleEle).addClass("select")
                     // 展示
                     $(panels).eq(lastIndex).hide()
                     $(panels).eq(curIndex).show()
+                    console.log(lastIndex, curIndex)
                     lastIndex = curIndex;
                     if (document.getElementById('centerClass')) {
                         // 课程中心页面回调
-                        root.getMenuData()
-                        root.renderSearch(dataid)
+                        let mainTagText = $(this).find('.item-text').text()
+                        $('.top_tag .menu-text').text(mainTagText)
+                        root.closeMainTagP()
+                        // 初始化 获取用户跳转过来的一级分类cate_id
+                        var cateId = $(this).data('id')
+                        console.log(cateId)
+                        var fenleiDataObj = {
+                            cate_id: cateId
+                        }
+                        root.modeAjaxGet(fenleiUrl, fenleiDataObj)
+                        // root.getMenuData()
+                        // root.renderSearch(dataid)
                     } else if (document.getElementById('chargeLl')) {
                         // 充值中心回调
                         let cgNum = $(this).find(".money-num").text().split("元")[0]
@@ -225,14 +249,62 @@
                         var froms = $(this).data('id')
                         obj.froms = froms
                         obj.page = 1
+                        // obj.videos_id = ''
                         console.log(obj)
                         root.modeAjaxPost(searUrl, obj)
                     }
                 }
-
+            })
+        }
+        // 分类标签选择
+        /**
+         * 
+         * @param {外層} panel 
+         * @param {按鈕} btn 
+         * @param {加樣式按鈕} styleEle 
+         */
+        // root.flTagChoice('.menu-bar', ".bar-item", ".item-text")
+        function flTagChoice(panel, btn, styleEle) {
+            $(panel).each(function () {
+                let outIndex = $(this).index()
+                let curIndex
+                let lastIndex
+                let dataid
+                var that = $(this)
+                that.find(btn).unbind()
+                that.find(btn).on("click", function (e) {
+                    curIndex = $(this).index()
+                    console.log('最近点击按钮；' + curIndex)
+                    if (curIndex === lastIndex) {
+                        // 不变
+                        return false;
+                    } else {
+                        // 样式  
+                        if ($(this).attr("data-id")) {
+                            dataid = $(this).attr("data-id")
+                        }
+                        // 展示
+                        lastIndex = curIndex;
+                        that.find(btn).find(styleEle).removeClass('select')
+                        $(this).find(styleEle).addClass('select')
+                        if (document.getElementById('centerClass')) {
+                            // 课程中心页面回调
+                            // 清除选中项以下的所有分类
+                            for (var i = outIndex; i < $(panel).length; i++) {
+                                $(panel).eq(outIndex + 1).remove()
+                                console.log(i)
+                            }
+                            var fenleiDataObj = {
+                                cate_id: dataid
+                            }
+                            root.modeAjaxGetThd(fenleiUrl, fenleiDataObj)
+                        }
+                    }
+                })
             })
         }
 
+        root.flTagChoice = flTagChoice
         // 搜索页面展示 菜单栏
         let showMn = () => {
             $(".img-b").on("click", function () {
@@ -244,18 +316,24 @@
                     left: '0'
                 }, "fast")
                 $(".close-p").on("click", function () {
-                    $(".left-list").animate({
-                        left: '-64px'
-                    }, "fast")
-                    setTimeout(() => {
-                        $(".hid-menu").animate({
-                            left: '-100vw'
-                        }, "fast")
-                    }, 0);
-                    return false
+                    root.closeMainTagP()
                 })
+
             })
         }
+        // 关闭展开的搜索页
+        function closeMainTagP() {
+            $(".left-list").animate({
+                left: '-64px'
+            }, "fast")
+            setTimeout(() => {
+                $(".hid-menu").animate({
+                    left: '-100vw'
+                }, "fast")
+            }, 0);
+            return false
+        }
+        root.closeMainTagP = closeMainTagP
         // 发送二维码
         let sendCode = () => {
             $("#sendCode").on("click", function () {
@@ -313,10 +391,14 @@
                 var teacher_name = item.teacher_name
                 var title = item.title
                 if (shoufei == 1) {
-                    shoufei = '公益课'
+                    var sfText = '试听课'
+                    var shoufeiHtml = `
+                        <span class="tag tag-free">${sfText}</span>
+                    `
                 } else {
-                    shoufei = '付费课'
-                    teacher_name += '(' + school_name + ')'
+                    var shoufeiHtml = ` `
+                    // shoufei = ''
+                    // teacher_name += '(' + school_name + ')'
                 }
 
                 lesConHtml += `
@@ -331,8 +413,8 @@
                                 <div class="les-item-r">
                                     <div class="les-item les-title">
                                         <h3 class="les-text one-ellipsis">${name}</h3>
-                                                                                <span class="tag tag-free">${shoufei}</span>
-                                                                            </div>
+                                            ${shoufeiHtml}
+                                        </div>
                                     <div class="les-item les-title">
                                         <div class="les-text three-ellipsis">
                                         ${title}                                      
@@ -345,16 +427,13 @@
                             </div>
                         </a>
                     </li>
-                
                 `
             })
-
             $('.les_con_list').empty().append(lesConHtml)
         }
         root.renderLesCont = renderLesCont
         // 渲染课程中心的课程分类标签
         function renderFenleiTag(data) {
-            console.log(data)
             // 取最后一类
             var len = data.length
             var lastTag = data[len - 1][0]
@@ -363,7 +442,7 @@
                 cate_id: finalId,
                 page: 1,
             }
-
+            $('.insert_con_list').empty()
             var tagListPanel = ''
             // 把最后一个标签id发送后台，渲染页面
             root.modeAjaxGetSec(kechengUrl, lesDataObj)
@@ -379,7 +458,7 @@
                 $('.insert_con_list').append(tagListPanel)
                 var tagListIn = ''
                 $.each(item, function (index2, item2) {
-                    console.log(item2)
+                    // console.log(item2)
                     var id = item2.id
                     var name = item2.name
                     // var previd = item2.previd
@@ -401,45 +480,77 @@
                 $('.insert_con_list .menu-bar').eq(index).find('.les_tag_list').append(tagListIn)
                 // 绑定标签切换事件事件
                 // root (".bar-item", ".item-text")
+                root.flTagChoice('.menu-bar', ".bar-item", ".item-text")
             })
-            var demo = `
-                <div class="menu-bar">
-                    <div class="bar-list">
-                        <ul class="les_tag_list">
-                            <li class="bar-item" data-id="0">
-                                <div class="item-text select">全部</div>
-                            </li>
-                            <li class="bar-item" data-id="4">
-                                <div class="item-text">书法</div>
-                            </li>
-                            <li class="bar-item" data-id="5">
-                                <div class="item-text">国画</div>
-                            </li>
-                            <li class="bar-item" data-id="6">
-                                <div class="item-text">古文</div>
-                            </li>
-                            <li class="bar-item" data-id="36">
-                                <div class="item-text">汉字字源</div>
-                            </li>
-                            <li class="bar-item" data-id="39">
-                                <div class="item-text">汉字的来源</div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            `
-
         }
         root.renderFenleiTag = renderFenleiTag
-        // 渲染搜索
-        let searchRender = (data) => {
+        // 渲染课程中心的课程分类标签
+        function renderFenleiTagSec(data) {
             console.log(data)
-            var searHtml = ''
-            $.each(searList, function (index, item) {
+            // 取最后一类
+            if (data.length != 0) {
+                var len = data.length
+                var lastTag = data[len - 1][0]
+                var finalId = lastTag.id
+            } else {
+                // 如果没有下一级
+                // 找到最后一个分类，被选中的分类dataid
+                var finalId = $('.insert_con_list .menu-bar:last-child .select').parent('.bar-item').data('id')
+            }
+            var lesDataObj = {
+                cate_id: finalId,
+                page: 1,
+            }
 
+            var tagListPanel = ''
+            // 把最后一个标签id发送后台，渲染页面
+            root.modeAjaxGetSec(kechengUrl, lesDataObj)
+            $.each(data, function (index, item) {
+                tagListPanel = `
+                        <div class="menu-bar">
+                            <div class="bar-list">
+                                <ul class="les_tag_list">
+                                </ul>
+                            </div>
+                        </div>
+                    `
+                $('.insert_con_list').append(tagListPanel)
+                var tagListIn = ''
+                $.each(item, function (index2, item2) {
+                    // console.log(item2)
+                    var id = item2.id
+                    var name = item2.name
+                    // var previd = item2.previd
+                    if (index2 != 0) {
+                        tagListIn += `
+                        <li class="bar-item" data-id="${id}">
+                            <div class="item-text">${name}</div>
+                        </li>
+                    `
+                    } else {
+                        tagListIn += `
+                        <li class="bar-item" data-id="${id}">
+                            <div class="item-text select">${name}</div>
+                        </li>
+                    `
+                    }
+
+                });
+                $('.insert_con_list .menu-bar:last-child').find('.les_tag_list').append(tagListIn)
+                // 绑定标签切换事件事件
+                root.flTagChoice('.menu-bar', ".bar-item", ".item-text")
             })
         }
-        root.searchRender = searchRender
+        root.renderFenleiTagSec = renderFenleiTagSec
+        // 渲染搜索
+        // let searchRender = (data) => {
+        //     console.log(data)
+        //     var searHtml = ''
+        //     $.each(searList, function (index, item) {
+
+        //     })
+        // }
+        // root.searchRender = searchRender
         // 提交评分成功
         let renderPf = (result) => {
             if (result.msg == "success") {
@@ -492,6 +603,9 @@
                     layui.use('layer', function () {
                         var layer = layui.layer;
                         layer.msg('失败，流量币不足');
+                        setTimeout(() => {
+                            window.location.href = chargeSrc;
+                        }, 2000);
                     });
                     break;
                 case 4:
@@ -505,6 +619,12 @@
         }
 
         let appendDetVideoBtn = () => {
+            if ($('.det-box .none-text').length) {
+                var lesInfo = '暂无课程介绍'
+            } else {
+
+            }
+
             var html = `
                 <div class="ts-b">
                     <div class="ts-text">
@@ -515,16 +635,17 @@
                      <div class="join-btn join_btn">
                     <div>加入学习</div>
                     </div> 
-                    <div class="charge-btn">
-                        <a href='${chargeSrc}' class='charge_link'>充流量币</a>
-                    </div> 
+                        <div class="charge-btn">
+                            <a href='${chargeSrc}' class='charge_link'>充流量币</a>
+                        </div> 
                     </div>
             `
             $(".pre_play_b").empty()
             $(".pre_play_b").append(html)
             // 购买失败，在购买
-            var money = $("")
-            var text = '本课程88流量币，是否确认购买？'
+            var money = $('.off-price').text().split(' ')[1]
+            console.log(money)
+            var text = '本课程' + money + '流量币，是否确认购买？'
             root.jionStudy(text)
         }
         root.appendDetVideoBtn = appendDetVideoBtn
@@ -538,6 +659,14 @@
      * init.js
      */
     (function ($, root) {
+        // 获取地址中的参数Id
+        function getQueryString(id) {
+            var reg = new RegExp("(^|&)" + id + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return r[2];
+            return '';
+        }
+        root.getQueryString = getQueryString
         // 处理表单数据
         let dealFormData = (formData) => {
             // console.log(444)
@@ -568,8 +697,14 @@
 
         let ifBuyLes = (status, callback) => {
             if (status != 1) {
+                if ($('.det-box .none-text').length) {
+                    var lesInfo = '暂无课程介绍'
+                } else {
+
+                }
                 var html = `
                 <div class="prevent-play pre_play_b">
+                   
                     <div class="ts-b">
                         <div class="ts-text">
                             立刻加入学习观看！~
@@ -644,19 +779,22 @@
         let error = () => {
             layer.msg("网络错误~~")
             if (document.getElementById('videoDet')) {
+                if ($('.det-box .none-text').length) {
+                    var lesInfo = '暂无课程介绍'
+                } else {}
                 var html = `
-                <div class="ts-b">
-                    <div class="ts-text">
-                        立刻加入学习观看！~
+                    <div class="ts-b">
+                        <div class="ts-text">
+                            立刻加入学习观看！~
+                        </div>
                     </div>
-                </div>
-                <div class="btn-b">
-                     <div class="join-btn join_btn">
-                    <div>加入学习</div>
-                    </div> 
-                    <div class="charge-btn">
-                        a href='${chargeSrc}' class='charge_link'>充流量币</a>
-                    </div> 
+                    <div class="btn-b">
+                        <div class="join-btn join_btn">
+                        <div>加入学习</div>
+                        </div> 
+                            <div class="charge-btn">
+                                <a href='${chargeSrc}' class='charge_link'>充流量币</a>
+                            </div> 
                     </div>
                 `
                 $(".pre_play_b").empty()
@@ -694,7 +832,7 @@
                 dataType: "JSON",
                 beforeSend: beforeFnSec,
                 success: function (result) {
-                    // console.log(result)
+                    console.log(result)
                     if (document.getElementById('centerClass')) {
                         console.log('课程中心')
                         root.renderFenleiTag(result)
@@ -723,7 +861,25 @@
             })
         }
         root.modeAjaxGetSec = modeAjaxGetSec
-
+        // getMode3
+        let modeAjaxGetThd = (url, data) => {
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: data,
+                dataType: "JSON",
+                beforeSend: beforeFnSec,
+                success: function (result) {
+                    // console.log(result)
+                    if (document.getElementById('centerClass')) {
+                        console.log('更新课程中心分类')
+                        root.renderFenleiTagSec(result)
+                    }
+                },
+                error: error
+            })
+        }
+        root.modeAjaxGetThd = modeAjaxGetThd
         // 获取验证码
         let getCode = () => {
             let url = "hhh"
@@ -770,15 +926,32 @@
             });
         } else if (document.getElementById('centerClass')) {
             // 课程中心
-            // 默认第一个分类的id
-            var firstFlId = $('.hid_item').data('id')
+            var firstFlId
+            // 课程中心页面回调
+            let mainTagText = $(this).find('.item-text').text()
+            $('.top_tag .menu-text').text(mainTagText)
+            root.closeMainTagP()
+            // 初始化 获取用户跳转过来的一级分类cate_id
+            var cate_id = root.getQueryString('cate_id')
+
+            if (cate_id == '') {
+                var firstDataId = $('.hid-list .hid_item:first-child').data('id')
+                var cateName = $('.hid-list .hid_item:first-child').find('.item-text').text()
+                console.log(1111111111)
+                console.log(firstDataId)
+                firstFlId = firstDataId
+            } else {
+                var firstDataId = cate_id
+                $('.hid-list select').removeClass('select')
+                var cateName = $('.hid-list .select .item-text').text()
+                firstFlId = firstDataId
+            }
+            $('.top_tag').find('.menu-text').text(cateName)
             var fenleiDataObj = {
-                cate_id: "3"
+                cate_id: firstFlId
             }
             console.log(fenleiDataObj)
             root.modeAjaxGet(fenleiUrl, fenleiDataObj)
-            // 获取默认分类数据
-            console.log(fenleiUrl)
             // 实例化轮播
             var swiper = new Swiper('.swiper-container', {
                 slidesPerView: 2,
@@ -812,7 +985,9 @@
             // 判断是否买了课程
             root.ifBuyLes(is_buy_lesson, function () {
                 // 如果没有购买课程，提示购买
-                var text = '本课程88流量币，是否确认购买？'
+                var money = $('.off-price').text().split(' ')[1]
+                console.log(money)
+                var text = '本课程' + money + '流量币，是否确认购买？'
                 root.jionStudy(text)
             })
 
@@ -932,3 +1107,8 @@
     }(window.$, window.wangjiao || (window.wangjiao = {})));
 
 }());
+
+console.log($(".link-back"))
+$("header").on('click', function () {
+    console.log('1aaaaaaaaaaaa')
+})

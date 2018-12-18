@@ -5,7 +5,7 @@
     background-color: #f5f5f5;
     header {
         position: absolute;
-        z-index: 999;
+        z-index: 999999;
         left: 0;
         right: 0;
         background-color: transparent;
@@ -28,10 +28,13 @@
                 h3 {
                     font-size: 18px;
                     font-weight: normal;
-                    line-height: 1.2;
+                    line-height: 1.5;
                 }
             }
             .det-item {
+                .teji-show{
+                    display: flex;
+                }
                 .price-b {
                     float: right; // width: 120px;
                     text-align: center;
@@ -70,15 +73,18 @@
                 }
             }
             .video-school {
+                padding: 0 26px;
                 color: #b9b9b9;
             }
             .video-author {
-                line-height: 1.4;
+                height: 30px;
+                line-height: 30px;
+                padding-right: 10px;
                 span:nth-of-type(1) {
                     display: inline-block;
-                    width: 18px;
-                    height: 18px;
-                    vertical-align: sub;
+                    width:22px;
+                    height: 22px;
+                    vertical-align: text-top;
                     img {
                         display: block;
                         width: 100%;
@@ -166,6 +172,10 @@
                     .fst-text {
                         line-height: 2;
                     }
+                    .select {
+                        font-weight: bold;
+                        color: #3784fa;
+                    }
                 }
                 .list-b {
                     line-height: 2;
@@ -224,13 +234,30 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    z-index: 999999;
+    height: 250px;
+    // bottom: 0;
+    z-index: 10000;
     background-color: rgba(0, 0, 0, 0.8);
+    .show-les-info {
+        display: none;
+        min-width: 260px;
+        padding: 0 40px;
+        color: #fff;
+        .title-info {
+            margin-bottom: 10px;
+        }
+        h3 {}
+        .les-info-text {
+            p {
+                line-height: 1.4;
+                font-size: 16px;
+            }
+        }
+    }
     .ts-b {
         line-height: 3;
         font-size: 18px;
@@ -241,9 +268,7 @@
         width: 30px;
         height: 30px;
     }
-
-    .btn-b{
-        
+    .btn-b {
         display: flex;
         width: 60%;
         justify-content: space-between;

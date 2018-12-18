@@ -13,7 +13,7 @@
   margin-bottom: 10px;
 }
 #centerUser .mian-show .user-info-b {
-  padding: 0 15px 15px;
+  padding: 15px 15px 15px;
   background-color: #fff;
 }
 #centerUser .mian-show .user-info-b .user-info {
@@ -48,13 +48,19 @@
   color: #999;
 }
 #centerUser .mian-show .setting-list {
-  padding-bottom: 10px;
+  margin-bottom: 10px;
   background-color: #fff;
 }
 #centerUser .mian-show .setting-list .setting-item {
   position: relative;
   padding: 0 10px;
   line-height: 3;
+}
+#centerUser .mian-show .setting-list .setting-item .item-link:after {
+  border-color: #ddd;
+}
+#centerUser .mian-show .setting-list .setting-item:after {
+  border-color: #ddd;
 }
 #centerUser .mian-show .setting-list .item-link {
   display: flex;

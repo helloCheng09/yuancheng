@@ -11,7 +11,7 @@
     .mian-show {
         margin-bottom: 10px;
         .user-info-b {
-            padding: 0 15px 15px;
+            padding: 15px 15px 15px;
             background-color: #fff;
             .user-info {
                 display: flex;
@@ -49,7 +49,7 @@
             }
         }
         .setting-list {
-            padding-bottom: 10px;
+            margin-bottom: 10px;
             background-color: #fff;
             .setting-b {}
             ul {}
@@ -57,7 +57,14 @@
                 position: relative;
                 padding: 0 10px;
                 line-height: 3;
+                .item-link:after {
+                    border-color: #ddd;
+                }
             }
+            .setting-item:after {
+                border-color: #ddd;
+            }
+            
             .item-link {
                 display: flex;
                 justify-content: space-between;
