@@ -87,10 +87,7 @@
                         layer.title('课程评分', index)
                     });
                 }
-
-
             })
-
         }
         // 点击星星
         function clickStart() {
@@ -158,13 +155,6 @@
                         break;
 
                 }
-                // var lessonData = {
-                //     fansid: "40861",
-                //     froms: "2",
-                //     lesson_id: "2",
-                //     traffic_coin: "100",
-                //     videos_id: "2"
-                // }
                 // 讲0 -100转为 0 -10
                 var scores = percent / 10
                 $(".star-tc .text-con").text(pfText)
@@ -1007,6 +997,10 @@
                 "controlBarVisibility": "click",
                 "showBarTime": 5000,
                 "useH5Prism": true,
+                "components": [{
+                    "name": 'MemoryPlayComponent',
+                    "type": AliPlayerComponent.MemoryPlayComponent,
+                  }],
                 "skinLayout": [{
                         "name": "bigPlayButton",
                         "align": "blabs",
@@ -1075,7 +1069,13 @@
                 ]
             }, function (player) {
                 console.log("播放器创建了。");
+                console.log(player);
+                $('.prism-fullscreen-btn').hide()
+                $('.prism-big-play-btn').on('click', function () {
+                    $('.prism-fullscreen-btn').show()
+                })
             });
+            
             // 确认加入学习
             root.clickPingf()
             root.newTagToggle(".nav-item", ".nav-text", ".det-panel")
