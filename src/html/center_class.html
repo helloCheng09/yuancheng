@@ -13,6 +13,7 @@
     <!-- js -->
     <script type='text/javascript' src="../js/depend/jQuery.min.js"></script>
     <script type='text/javascript' src="../js/depend/swiper.min.js"></script>
+    <script src="../js/depend/myLazyLoad.js"></script>
 </head>
 
 <body>
@@ -149,8 +150,8 @@
 
             </div>
             <div class="my-les">
-                <ul class='les_con_list'>
-                    <li class="item-m  mob_1px_b" data-id="">
+                <ul class='les_con_list' id="myList">
+                    <!-- <li class="item-m load_item  mob_1px_b" data-id="">
                         <a href="../html/video_det.html" class="item-link">
                             <div class="item-b">
                                 <div class="les-item-l">
@@ -161,7 +162,32 @@
                                 <div class="les-item-r">
                                     <div class="les-item les-title">
                                         <h3 class="les-text one-ellipsis">小学三年级数学辅导导11122444444</h3>
-                                        <span class="tag">付费课</span>
+                                    </div>
+                                    <div class="les-item les-title">
+                                        <div class="les-text three-ellipsis">
+                                            简介：针对三年级数学第三章乘除法内容针对三年级数学第三章乘除法内容针对三年级数学第三章乘除法内容针对三年级数学第三章乘除法内容针对三年级数学第三章乘除法内容针对三年级数学第三章乘除法内容针对三年级数学第三章乘除法内容
+                                        </div>
+                                    </div>
+                                    <div class="les-item les-title">
+                                        <div class="les-text  one-ellipsis les-author">主讲教师：石国鹏</div>
+                                        <span class="tag">88人学习</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="item-m load_item mob_1px_b" data-id="">
+                        <a href="../html/video_det.html" class="item-link">
+                            <div class="item-b">
+                                <div class="les-item-l">
+                                    <div class="img-b">
+                                        <div class="img-show" style="background-image:url()"></div>
+                                    </div>
+                                </div>
+                                <div class="les-item-r">
+                                    <div class="les-item les-title">
+                                        <h3 class="les-text one-ellipsis">小学三年级数学辅导导11122444444</h3>
+
                                     </div>
                                     <div class="les-item les-title">
                                         <div class="les-text three-ellipsis">
@@ -170,36 +196,12 @@
                                     </div>
                                     <div class="les-item les-title">
                                         <div class="les-text one-ellipsis les-author">主讲教师：石国鹏</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="item-m mob_1px_b" data-id="">
-                        <a href="../html/video_det.html" class="item-link">
-                            <div class="item-b">
-                                <div class="les-item-l">
-                                    <div class="img-b">
-                                        <div class="img-show" style="background-image:url()"></div>
-                                    </div>
-                                </div>
-                                <div class="les-item-r">
-                                    <div class="les-item les-title">
-                                        <h3 class="les-text one-ellipsis">小学三年级数学辅导导11122444444</h3>
                                         <span class="tag tag-free">公益课</span>
                                     </div>
-                                    <div class="les-item les-title">
-                                        <div class="les-text three-ellipsis">
-                                            简介：针对三年级数学第三章乘除法内容针对三年级数学第三章乘除法内容针对三年级数学第三章乘除法内容针对三年级数学第三章乘除法内容针对三年级数学第三章乘除法内容针对三年级数学第三章乘除法内容针对三年级数学第三章乘除法内容
-                                        </div>
-                                    </div>
-                                    <div class="les-item les-title">
-                                        <div class="les-text one-ellipsis les-author">主讲教师：石国鹏</div>
-                                    </div>
                                 </div>
                             </div>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </section>
@@ -241,12 +243,21 @@
         </div>
     </div>
 
+    <!-- 回顶 -->
+    <div class="go-top" id="goTop">
+        <a href="javascript:;" class="top-link-text">
+            顶部
+        </a>
+    </div>
+
 </body>
 <script>
     // 默认说有分类请求
     var fenleiUrl = `<?php echo site_url('videos/videos/lessonCate')?>`
+    fenleiUrl = 'https://www.easy-mock.com/mock/5b9c69299c53ef2876d29227/list/lessonCateMob'
     // 默认说有分类请求
     var kechengUrl = `<?php echo site_url('videos/videos/lessonList')?>`
+    kechengUrl = 'https://www.easy-mock.com/mock/5b9c69299c53ef2876d29227/list/lesListMob'
 </script>
 <!-- js -->
 <script type='text/javascript' src="../js/depend/layui/layui.all.js"></script>
