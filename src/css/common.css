@@ -300,9 +300,10 @@ header .back-icon img {
   font-size: 14px;
   line-height: 1.4;
   color: #999;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
 }
 .my-les .item-m .les-item .les-author {
+  flex: 1;
   font-size: 14px;
   line-height: 1.2;
   color: #999;

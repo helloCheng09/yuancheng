@@ -156,7 +156,7 @@
   padding: 0 !important;
 }
 #videoDet .det-panel .det-box {
-  padding: 0 8px;
+  padding: 0 8px 10px;
 }
 #videoDet .det-panel .det-box .menu-list .fst-list-b .fst-menu {
   padding: 0 20px;

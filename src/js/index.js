@@ -577,10 +577,16 @@
         // 提交评分成功
         let renderPf = (result) => {
             if (result.msg == "success") {
-                layer.msg('评分提交成功')
+                // 提示评分提交成功
+                layer.msg('评分提交成功',{
+                    time:2000
+                })
+                // 刷新页面展示刚提交的评分
                 setTimeout(function () {
-                    layer.closeAll()
-                }, 3000)
+                    // layer.closeAll()
+                    window.location.reload()
+                }, 2000)
+
             } else {
                 $(".pj_btn_b").empty()
                 $(".pj_btn_b").append(`<input class='pj-btn' type='button' value = '提交'>`)
@@ -610,7 +616,13 @@
                     $(".pre_play_b").remove()
                     layui.use('layer', function () {
                         var layer = layui.layer;
-                        layer.msg('成功加入学习');
+                        layer.msg('成功加入学习',{
+                            time:2000
+                        });
+                        // setTimeout(() => {
+                        //      window.location.reload()
+                        // }, 2000);
+                        is_buy_lesson = 1
                     });
                     break;
                 case 2:
@@ -797,6 +809,7 @@
                 success: function (result) {
                     console.log(result)
                     if (document.getElementById('videoDet')) {
+                        // 加入学习
                         var res = result.code
                         root.msgDet(res)
                     } else if (document.getElementById('lessonSearch')) {
@@ -819,6 +832,7 @@
                     console.log(result)
                     if (document.getElementById('videoDet')) {
                         root.renderPf(result)
+
                     }
                 },
                 error: error
