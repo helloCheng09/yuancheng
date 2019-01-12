@@ -124,7 +124,7 @@ class LazyLoad {
             var overtext = "Duang~到底了    ";
             var overHtml = `
                 <div class="load-more-bx">
-                <div class="loadover"><span class='over-text'>${overtext}</span></div>
+                    <div class="loadover"><span class='over-text'>${overtext}</span></div>
                 </div>
             `
             window.timer1 = setTimeout(() => {

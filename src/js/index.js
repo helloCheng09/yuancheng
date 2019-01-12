@@ -441,23 +441,32 @@
         }
         root.renderLesCont = renderLesCont
         // 渲染课程中心的课程分类标签
-        function renderFenleiTag(data) {
+        function renderFenleiTag(res, data) {
             // 取最后一类
-            var len = data.length
-
-            var lastTag = data[len - 1][0]
-            var finalId = lastTag.id
-            var lesDataObj = {
-                cate_id: finalId,
-                page: 0,
+            var len = res.length
+            console.log(res)
+            if (res.length == 0) {
+                var finalId = data.cate_id
+                var lesDataObj = {
+                    cate_id: finalId,
+                    page: 0,
+                }
+            } else {
+                var lastTag = res[len - 1][0]
+                var finalId = lastTag.id
+                var lesDataObj = {
+                    cate_id: finalId,
+                    page: 0,
+                }
             }
+
             $('.insert_con_list').empty()
             var tagListPanel = ''
             // 把最后一个标签id发送后台，渲染页面
 
             root.lazyLoadLesCenter(kechengUrl, lesDataObj)
             // root.modeAjaxGetSec(kechengUrl, lesDataObj)
-            $.each(data, function (index, item) {
+            $.each(res, function (index, item) {
                 tagListPanel = `
                         <div class="menu-bar">
                             <div class="bar-list">
@@ -677,7 +686,7 @@
             // 判断手机型号
             var phonetype = root.phoneType()
             if (phonetype == 'ios') {
-                $('.les-item .tag-free').css('paddingTop', '2px')
+                // $('.les-item .tag-free').css('paddingTop', '2px')
             }
         }
         root.lcAddPadding = lcAddPadding
@@ -875,7 +884,7 @@
                     console.log(result)
                     if (document.getElementById('centerClass')) {
                         console.log('课程中心')
-                        root.renderFenleiTag(result)
+                        root.renderFenleiTag(result, data)
                     }
                 },
                 error: error
@@ -1045,20 +1054,26 @@
             root.closeMainTagP()
             // 初始化 获取用户跳转过来的一级分类cate_id
             var cate_id = root.getQueryString('cate_id')
-
+            // var cate_id = ''
             if (cate_id == '') {
+                
+                // 获取当前一级标签id
                 var firstDataId = $('.hid-list .hid_item:first-child').data('id')
                 var cateName = $('.hid-list .hid_item:first-child').find('.item-text').text()
                 // console.log(1111111111)
-                // console.log(firstDataId)
+                console.log(firstDataId, cateName)
                 firstFlId = firstDataId
+                $('.top_tag').find('.menu-text').text(cateName)
             } else {
+                // 改变一级标签
+                var curTag = $(".hid_item[data-id='"+ cate_id +"']").text()
+                $('.top_tag .menu-text').text(curTag)
+                console.log(curTag, $('.top_tag .menu-text'))
                 var firstDataId = cate_id
                 $('.hid-list select').removeClass('select')
                 var cateName = $('.hid-list .select .item-text').text()
                 firstFlId = firstDataId
             }
-            $('.top_tag').find('.menu-text').text(cateName)
             var fenleiDataObj = {
                 cate_id: firstFlId
             }
